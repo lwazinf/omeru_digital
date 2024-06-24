@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { RecoilRoot } from "recoil";
+import ItemView_ from "./components/ItemView_";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}><RecoilRoot>
         {children}
+        <ItemView_ />
       </RecoilRoot></body>
     </html>
   );

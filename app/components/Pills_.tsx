@@ -18,7 +18,7 @@ const Pills_ = () => {
       >
         RE-L8: {collection_ ? collection_ : "Full Offering"}
       </div> */}
-      <div className={`flex flex-row z-[2] w-full pb-2`}>
+      <div className={`flex flex-row w-full pb-2`}>
         <div
           className={`w-full h-full flex flex-row md2:justify-end justify-center items-center`}
         >

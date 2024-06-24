@@ -4,13 +4,15 @@ import {
   faAdd,
   faChevronLeft,
   faRepeat,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
-import { OfferState, CategoryState } from "./atoms/atoms";
+import { OfferState, CategoryState, ViewItemState } from "./atoms/atoms";
 import {
   AddProduct_,
+  DeleteProduct_,
   getProducts_,
   uploadFileAndGetDownloadLink,
 } from "./utils/utils";
@@ -22,7 +24,21 @@ interface Product_Props {
 
 export const Product_ = ({ data_ }: Product_Props) => {
   const [card_, setCard_] = useState(false);
-  // const [offer_, setOffer_] = useRecoilState(OfferState);
+  const [offers_, setOffers_] = useRecoilState(OfferState);
+  const [viewItem_, setViewItem_] = useRecoilState(ViewItemState);
+  const [categories_, setCategories_] = useRecoilState(CategoryState);
+  const initProducts_ = async () => {
+    const data_ = await getProducts_("products");
+    setOffers_(data_);
+  };
+
+  useEffect(() => {
+    const uniqueCategories = [
+      // @ts-ignore
+      ...new Set(offers_.map((offer) => offer.category)),
+    ];
+    setCategories_(uniqueCategories);
+  }, [offers_]);
   return (
     <div
       className={`w-[300px] h-[350px] transition-all hover:duration-200 duration-500 flex flex-col justify-center items-center rounded-[4px] relative overflow-hidden`}
@@ -50,10 +66,10 @@ export const Product_ = ({ data_ }: Product_Props) => {
               } transition-all`}
               onClick={() => {
                 //   setOffer_(data_);
-                console.log(data_);
+                setViewItem_(true);
               }}
             >
-              <p className={`text-[15px] font-black`}>Add To Cart</p>
+              <p className={`text-[15px] font-black`}>View this item</p>
             </div>
           </div>
         </div>
@@ -83,14 +99,16 @@ export const Product_ = ({ data_ }: Product_Props) => {
             >
               From <span className={`text-red-600`}>R{data_.price}</span>
             </p>
-            <div className={`w-[90%] h-[90px] flex flex-col justify-end items-center mt-[20%]`}>
-            <p
-              className={`bg-white/20 backdrop-blur-sm px-2 py-2 rounded text-[12px] text-white/90 font-medium transition-all ${
-                card_ ? "opacity-100 duration-1000" : "opacity-0 duration-200"
-              }`}
+            <div
+              className={`w-[90%] h-[90px] flex flex-col justify-end items-center mt-[20%]`}
             >
-              {data_.desc}
-            </p>
+              <p
+                className={`bg-white/20 backdrop-blur-sm px-2 py-2 rounded text-[12px] text-white/90 font-medium transition-all ${
+                  card_ ? "opacity-100 duration-1000" : "opacity-0 duration-200"
+                }`}
+              >
+                {data_.desc}
+              </p>
             </div>
           </div>
         </div>
@@ -110,6 +128,18 @@ export const Product_ = ({ data_ }: Product_Props) => {
             className={`w-full h-full flex flex-col justify-end items-center absolute top-0 left-0 pb-2 px-8`}
           ></div>
         </div>
+      </div>
+      <div
+        className={`w-6 h-6 flex flex-col justify-center items-center absolute top-8 bg-white/50 hover:bg-white/80 backdrop-blur-md rounded-[50%] left-6 cursor-pointer text-[12px] text-red-600/60 hover:text-red-600 transition-all duration-200`}
+        onClick={async () => {
+          await DeleteProduct_(data_, () => {
+            console.log("Reinitializing Products..");
+            initProducts_();
+            console.log("Document delteted.");
+          });
+        }}
+      >
+        <FontAwesomeIcon icon={faTrash} />
       </div>
     </div>
   );
@@ -357,6 +387,7 @@ export const Init_ = () => {
               setParamSet_(!paramSet_);
             } else if (idx_ == 5) {
               const newOffer = {
+                id: v4(),
                 title: title_,
                 price: price_,
                 desc: desc_,
@@ -366,8 +397,8 @@ export const Init_ = () => {
               AddProduct_(newOffer, () => {
                 console.log("Reinitializing Products..");
                 initProducts_();
-                
-                setIsInit_(false)
+
+                setIsInit_(false);
                 setImages_(null);
                 setIdx_(0);
                 setPromptComplete_(false);

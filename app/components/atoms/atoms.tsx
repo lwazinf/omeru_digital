@@ -12,6 +12,11 @@ export const PillState = atom<any>({
   default: false,
 });
 
+export const ViewItemState = atom<any>({
+  key: `${COMPONENT_NAME}/ViewItemState`,
+  default: false,
+});
+
 export const SearchState = atom<any>({
   key: `${COMPONENT_NAME}/SearchState`,
   default: '',
