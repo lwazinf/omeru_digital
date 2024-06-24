@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 255, 255, 255;
+    --background-end-rgb: 255, 255, 255;
+  }
+}
+
+body {
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .passion_one {
+    font-family: "Passion One", sans-serif;
+  }
+
+  /* Input styling */
+  input,
+  textarea {
+    border: none;
+    resize: none;
+    background-color: transparent;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    background-color: transparent;
+  }
+
+  /* SwitchFifth_ Transitions */
+
+  .hidden-transition {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    transition: opacity 0.5s ease, visibility 0.5s ease, position 0.5s ease;
+  }
+  
+  .flex-transition {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    display: flex;
+    transition: opacity 0.5s ease, visibility 0.5s ease, position 0.5s ease;
+  }
+}
