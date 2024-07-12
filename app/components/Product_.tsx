@@ -843,7 +843,8 @@ export const Init_ = () => {
             if (idx_ === 0) {
               inputFile.current && inputFile.current.click();
             } else if ((idx_ === 2 && type_ === "Cake") || (idx_ === 2 && type_ === "Bulk")) {
-              console.log(2, 2);
+              setParamSet_(!paramSet_);
+            } else if (idx_ === 2) {
               setParamSet_(!paramSet_);
             } else if (
               (idx_ === 1 && title_.length >= 3) ||

@@ -270,7 +270,7 @@ const ItemView_ = () => {
                     menu_
                       ? "opacity-100 pointer-events-auto duration-200"
                       : "opacity-0 pointer-events-none duration-75"
-                  }`}
+                  } ${offer_ && offer_.type == 'Cake' ? 'opacity-100' : 'opacity-0'}`}
                 >
                   {/* <div
                     className={`min-w-2 h-full flex flex-col justify-start pt-2 items-center pr-3 absolute top-0 right-0`}
@@ -278,7 +278,7 @@ const ItemView_ = () => {
                   >
                     <FontAwesomeIcon icon={faTimes} className={`text-[15px]`} />
                   </div> */}
-                  {offer_ &&
+                  {offer_ && offer_.type == 'Cake' &&
                     menu_ == "Size" &&
                     transformList(offer_.price).map((obj____, index____) => {
                       return (
@@ -311,7 +311,7 @@ const ItemView_ = () => {
                         </div>
                       );
                     })}
-                  {offer_ &&
+                  {offer_ && offer_.type == 'Cake' &&
                     menu_ == "Flavour" &&
                     offer_.flavours.map((obj____: any, index____: any) => {
                       return (
