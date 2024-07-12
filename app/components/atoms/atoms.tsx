@@ -2,6 +2,31 @@ import { atom } from "recoil";
 
 const COMPONENT_NAME = '1.0'
 
+export const UserState = atom<any>({
+  key: `${COMPONENT_NAME}/UserState`,
+  default: null,
+});
+
+export const OfferState2 = atom<any>({
+  key: `${COMPONENT_NAME}/OfferState2`,
+  default: null,
+});
+
+export const CartState = atom<any>({
+  key: `${COMPONENT_NAME}/CartState`,
+  default: false,
+});
+
+export const SideBarState = atom<any>({
+  key: `${COMPONENT_NAME}/SideBarState`,
+  default: false,
+});
+
+export const ProductsState = atom<any>({
+  key: `${COMPONENT_NAME}/ProductsState`,
+  default: [],
+});
+
 export const ViewState = atom({
   key: `${COMPONENT_NAME}/ViewState`,
   default: true,
@@ -15,6 +40,11 @@ export const PillState = atom<any>({
 export const ViewItemState = atom<any>({
   key: `${COMPONENT_NAME}/ViewItemState`,
   default: false,
+});
+
+export const CurrentItemState = atom<any>({
+  key: `${COMPONENT_NAME}/CurrentItemState`,
+  default: {name: "", display: ""},
 });
 
 export const SearchState = atom<any>({

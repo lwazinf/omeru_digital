@@ -1,14 +1,23 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { SearchState } from "./atoms/atoms";
-import { faArrowRotateLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { CartState, SearchState, SideBarState } from "./atoms/atoms";
+import {
+  faArrowRotateLeft,
+  faBars,
+  faBasketShopping,
+  faCartShopping,
+  faSearch,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { signIn_ } from "./utils/utils";
 
 const Search_ = () => {
   const [searchPhrase_, setSearchPhrase_] = useRecoilState(SearchState);
+  const [cart_, setCart_] = useRecoilState(CartState);
+  const [sideBar_, setSideBar_] = useRecoilState(SideBarState);
   const [searchTemp_, setSearchTemp_] = useState("");
   return (
     <div
@@ -46,11 +55,39 @@ const Search_ = () => {
           }
         }}
       />
-      <div className={`relative min-w-[40px] min-h-[40px] left-[50px]`}>
+      <div
+        className={`relative min-w-[40px] min-h-[40px] left-[100px] flex flex-row justify-center items-center`}
+      >
         <div
-          className={`w-[40px] h-[40px] rounded-[50%] bg-red-500 cursor-pointer`}
-          onClick={signIn_}
-        />
+          className={`w-[40px] h-[40px] rounded-[50%] cursor-pointer flex flex-col justify-center items-center scale-[.9] hover:opacity-60 transition-all duration-200 ${
+            sideBar_ && "animate-pulse"
+          }`}
+          onClick={() => {
+            setSideBar_(!sideBar_);
+          }}
+        >
+          <FontAwesomeIcon icon={faBars} />
+        </div>
+        <div
+          className={`w-[40px] h-[40px] rounded-[50%] cursor-pointer flex flex-col justify-center items-center scale-[.9] hover:opacity-60 transition-all duration-200 ${
+            cart_ && "animate-pulse"
+          }`}
+          onClick={() => {
+            setCart_(!cart_);
+          }}
+        >
+          <FontAwesomeIcon icon={faCartShopping} />
+        </div>
+        <div
+          className={`w-[40px] h-[40px] rounded-[50%] cursor-pointer flex flex-col justify-center items-center scale-[.9] hover:opacity-60 transition-all duration-200 ${
+            cart_ && "animate-pulse"
+          }`}
+          onClick={() => {
+            signIn_();
+          }}
+        >
+          <FontAwesomeIcon icon={faUser} />
+        </div>
       </div>
     </div>
   );

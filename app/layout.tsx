@@ -5,6 +5,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { RecoilRoot } from "recoil";
 import ItemView_ from "./components/ItemView_";
+import Model_ from "./components/Model_";
+import Footer_ from "./components/Footer_";
+import SideBar_ from "./components/SideBar_";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +26,9 @@ export default function RootLayout({
       <body className={inter.className}><RecoilRoot>
         {children}
         <ItemView_ />
+        <Model_/>
+        <SideBar_/>
+      {/* <Footer_/> */}
       </RecoilRoot></body>
     </html>
   );
