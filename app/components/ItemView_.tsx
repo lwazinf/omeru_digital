@@ -13,6 +13,8 @@ import { faAngleDown, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import Groq from "groq-sdk";
 
+require('dotenv').config();
+
 interface ItemView_Props {}
 
 const ItemView_ = () => {
@@ -38,7 +40,7 @@ const ItemView_ = () => {
   const init = () => offer_ && setPrice_(offer_.price[2]);
 
   const groq = new Groq({
-    apiKey: "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", // This is the default and can be omitted
+    apiKey: process.env.GROQ_KEY, // This is the default and can be omitted
     dangerouslyAllowBrowser: true,
   });
 
@@ -96,7 +98,7 @@ const ItemView_ = () => {
           >
             {offer_ ? offer_.title : ""} <br />
             <span
-              className={`text-black/80 text-[90px] font-black tracking-tighter ${offer_.type != 'Bulk' ? 'opacity-0' : 'opacity-100'}`}
+              className={`text-black/80 text-[90px] font-black tracking-tighter ${offer_ && offer_.type != 'Bulk' ? 'opacity-0' : 'opacity-100'}`}
             >
               <span className={`text-red-600/80 _Bungee font-medium`}>
                 {bucket_}
