@@ -41,7 +41,7 @@ const ItemView_ = () => {
 
   const groq = new Groq({
     apiKey: process.env.GROQ_KEY, // This is the default and can be omitted
-    dangerouslyAllowBrowser: true,
+    // dangerouslyAllowBrowser: true,
   });
 
   const handleSubmit = async (text: string) => {
