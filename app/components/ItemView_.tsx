@@ -39,6 +39,7 @@ const ItemView_ = () => {
 
   const groq = new Groq({
     apiKey: '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', // This is the default and can be omitted
+    dangerouslyAllowBrowser: true
   });
 
   const handleSubmit = async (text: string) => {
