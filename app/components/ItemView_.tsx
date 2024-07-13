@@ -94,7 +94,7 @@ const ItemView_ = () => {
           <p
             className={`text-[60px] font-black text-black/30 relative bottom-[160px] leading-[1] tracking-tight`}
           >
-            {offer_ ? offer_.title : ""} <br />
+            {offer_ && offer_ ? offer_.title : ""} <br />
             <span
               className={`text-black/80 text-[90px] font-black tracking-tighter ${
                 offer_ && offer_.type != "Bulk" ? "opacity-0" : "opacity-100"
@@ -155,7 +155,10 @@ const ItemView_ = () => {
                 </p>
               </div>
               <div
-                className={`w-[255px] h-[50px] border-[1px] hover:bg-red-600/5 border-black/10 hover:border-red-600/30 transition-all duration-75 hover:duration-500 border-solid rounded-[3px] m-1 mb-[-40px] cursor-pointer flex flex-row justify-center items-center ${
+                // className={` cursor-pointer  ${
+                //   offer_ && offer_.type == "Bulk" ? "flex" : "hidden"
+                // }`}
+                className={`w-[255px] h-[50px] mx-[1px] cursor-pointer flex flex-row justify-center items-center bg-white/90 hover:bg-red-600/80 hover:text-white/80 text-black/80 transition-all hover:duration-75 backdrop-blur-md rounded-[3px] m-1 mb-[-40px] ${
                   offer_ && offer_.type == "Bulk" ? "flex" : "hidden"
                 }`}
               >
@@ -179,7 +182,7 @@ const ItemView_ = () => {
                   {quantity_ > 1 ? "units" : "unit"}
                 </p>
               </div>
-              {offer_.type == "Cake" && (
+              {offer_ && offer_.type == "Cake" && (
                 <div
                   className={`w-[255px] ${
                     offer_ && offer_.type == "Cake"
@@ -347,14 +350,14 @@ const ItemView_ = () => {
                     .map((obj_, index) => {
                       return (
                         <div
-                          className={`w-[50px] h-[50px] border-[1px] hover:bg-black/5 border-black/10 hover:border-black/30 transition-all duration-75 hover:duration-500 border-solid rounded-[3px] mx-1 cursor-pointer flex flex-col justify-center items-center`}
+                          className={`w-[50px] h-[50px] mx-[1px] cursor-pointer flex flex-col justify-center items-center bg-white/90 hover:bg-red-600/80 hover:text-white/80 text-black/80 transition-all hover:duration-75 backdrop-blur-md rounded-[3px]`}
                           key={index}
                           onClick={() => {
                             setBucket_(obj_.size + "L");
                             setPrice_(obj_.value);
                           }}
                         >
-                          <p className={`font-medium text-black/50`}>
+                          <p className={`font-medium scale-[0.8]`}>
                             {obj_.size}L
                           </p>
                         </div>

@@ -17,7 +17,7 @@ const Pills_ = () => {
     >
       <div className={`flex flex-row w-full pb-2`}>
         <div
-          className={`w-full h-full flex flex-row md2:justify-end justify-center items-center`}
+          className={`w-full h-full flex flex-row md2:justify-end justify-center items-center relative`}
         >
           {categories_.slice(0, 4).map((obj_: any, index: any) => {
             return (
@@ -35,6 +35,24 @@ const Pills_ = () => {
               </div>
             );
           })}
+          <div className={`w-[450px] min-h-2 mr-20 rounded-md bg-white/60 backdrop-blur-md p-2 z-[4] grid grid-cols-3 gap-4 top-0 justify-center items-center absolute transition-all duration-500 hover:duration-200 ${lock_ ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+          {categories_.map((obj_: any, index: any) => {
+            return (
+              <div
+                className={`min-w-[80px] h-[20px] border-solid border-[1px] border-black/50 hover:border-red-600 flex flex-row justify-center items-center rounded-[15px] mx-1 px-4 cursor-pointer text-black/65 hover:text-white/80 hover:bg-red-600 ${
+                  collection_ == obj_ && "bg-black text-white/80 border-black"
+                } transition-all duration-500 hover:duration-200`}
+                key={index}
+                onClick={() => {
+                  setPill_(!pill_);
+                  setCollection_(obj_ == collection_ ? "" : obj_);
+                }}
+              >
+                <p className={`text-[12px] text-center min-w-[80px]`}>{obj_}</p>
+              </div>
+            );
+          })}
+          </div>
           <div
                 className={`min-w-[20px] h-[20px] border-solid border-[1px] border-black/50 hover:border-red-600 flex flex-row justify-center items-center rounded-[15px] mx-1 px-4 cursor-pointer hover:text-white/80 hover:bg-red-600 transition-all duration-500 hover:duration-200 bg-black text-white/80 border-black`}
                 onClick={() => {

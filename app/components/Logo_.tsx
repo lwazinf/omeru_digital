@@ -56,4 +56,30 @@ export const Logo_ = () => {
           </div>
      );
   }
+
+  export const Social2_ = () => {
+    return ( 
+      <div
+            className={`relative w-full h- flex flex-col px-[80px] duration-[1000ms] justify-items-center items-center transition-all`}
+          >
+            {[
+              { icon: faTwitter },
+              { icon: faFacebook },
+              { icon: faInstagram },
+              { icon: faLinkedin },
+            ].map((obj_, index) => {
+              return (
+                <FontAwesomeIcon
+                  key={index}
+                  icon={obj_.icon}
+                  className={`transition-all text-[20px] cursor-pointer my-1 hover:text-[#ec1d2a] hover:duration-[75ms] duration-[1000ms] text-black/80`}
+                  onClick={() => {
+                    // go to twitter page
+                  }}
+                />
+              );
+            })}
+          </div>
+     );
+  }
    

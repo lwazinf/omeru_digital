@@ -19,7 +19,7 @@ export const CartState = atom<any>({
 
 export const SideBarState = atom<any>({
   key: `${COMPONENT_NAME}/SideBarState`,
-  default: false,
+  default: true,
 });
 
 export const ProductsState = atom<any>({
