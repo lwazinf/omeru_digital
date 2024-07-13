@@ -38,8 +38,8 @@ const ItemView_ = () => {
   const init = () => offer_ && setPrice_(offer_.price[2]);
 
   const groq = new Groq({
-    apiKey: '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', // This is the default and can be omitted
-    dangerouslyAllowBrowser: true
+    apiKey: "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", // This is the default and can be omitted
+    dangerouslyAllowBrowser: true,
   });
 
   const handleSubmit = async (text: string) => {
@@ -96,7 +96,9 @@ const ItemView_ = () => {
           >
             {offer_ ? offer_.title : ""} <br />
             <span
-              className={`text-black/80 text-[90px] font-black tracking-tighter ${offer_ && offer_.type != 'Bulk' ? 'opacity-0' : 'opacity-100'}`}
+              className={`text-black/80 text-[90px] font-black tracking-tighter ${
+                offer_ && offer_.type != "Bulk" ? "opacity-0" : "opacity-100"
+              }`}
             >
               <span className={`text-red-600/80 _Bungee font-medium`}>
                 {bucket_}
@@ -148,7 +150,7 @@ const ItemView_ = () => {
                     : !selectedSize_
                     ? 0
                     : offer_ && offer_.type == "Bulk"
-                    ? offer_.price["2"]
+                    ? offer_.price[bucket_.replace(/[L.]/g, "")]*quantity_
                     : 0}
                 </p>
               </div>
@@ -163,7 +165,7 @@ const ItemView_ = () => {
                   pattern="[0-9]*"
                   className={`font-medium text-black/50 w-[50%] text-right pr-2`}
                   placeholder={"1"}
-                  // value={quantity_ == 1 ? '' : quantity_}
+                  value={quantity_}
                   onChange={(e) => {
                     if (e.target.value === "") {
                       setQuantity_(1);
@@ -177,164 +179,162 @@ const ItemView_ = () => {
                   {quantity_ > 1 ? "units" : "unit"}
                 </p>
               </div>
-              <div
-                className={`w-[255px] ${
-                  offer_ && offer_.type == "Cake"
-                    ? "h-[125px] pointer-events-auto"
-                    : "h-[50px] pointer-events-none"
-                } transition-all duration-75 hover:duration-500 border-solid rounded-[3px] mb-0 flex flex-col justify-center items-center opacity-80 overflow-hidden relative`}
-              >
-                {[
-                  {
-                    name: "Select Size",
-                    func: () => {
-                      setMenu_("Size");
+              {offer_.type == "Cake" && (
+                <div
+                  className={`w-[255px] ${
+                    offer_ && offer_.type == "Cake"
+                      ? "h-[125px] pointer-events-auto"
+                      : "h-[50px] pointer-events-none"
+                  } transition-all duration-75 hover:duration-500 border-solid rounded-[3px] mb-0 flex flex-col justify-center items-center opacity-80 overflow-hidden relative`}
+                >
+                  {[
+                    {
+                      name: "Select Size",
+                      func: () => {
+                        setMenu_("Size");
+                      },
                     },
-                  },
-                  {
-                    name: "Select Flavour",
-                    func: () => {
-                      setMenu_("Flavour");
+                    {
+                      name: "Select Flavour",
+                      func: () => {
+                        setMenu_("Flavour");
+                      },
                     },
-                  },
-                  {
-                    name: "Topper",
-                    func: () => {
-                      setMenu_("");
-                      setTopper_(true)
-                      inputFile.current && inputFile.current.click();
+                    {
+                      name: "Topper",
+                      func: () => {
+                        setMenu_("");
+                        setTopper_(true);
+                        inputFile.current && inputFile.current.click();
+                      },
                     },
-                  },
-                ].map((obj___, index___) => {
-                  return (
-                    <div
-                      className={`min-w-[40%] min-h-2 py-1 my-1 flex flex-row justify-center items-start bg-white/90 hover:bg-red-600/80 hover:text-white/80 text-black/80 transition-all hover:duration-100 backdrop-blur-md rounded-md ${
-                        menu_
-                          ? "opacity-0 pointer-events-none"
-                          : "opacity-100 pointer-events-auto"
-                      } cursor-pointer`}
-                      key={index___}
-                      onClick={obj___.func}
-                    >
-                      <input
-                        type="file"
-                        id="file"
-                        ref={inputFile}
-                        // onChange={onSelectFile}
-                        accept="image/png, image/jpeg, image/webp"
-                        style={{ display: "none" }}
-                      />
-                      <div className="w-full min-h-2 flex flex-col justify-center items-center">
-                        <div className="w-full flex flex-row justify-center items-center">
-                          {obj___.name == "Select Size" && (
-                            <p className="ml-1 scale-[0.8]">
-                              {selectedSize_ && obj___.name == "Select Size"
-                                ? selectedSize_ == "lg"
-                                  ? "Size: Large"
-                                  : selectedSize_ == "md"
-                                  ? "Size: Medium"
-                                  : "Size: Small"
-                                : obj___.name}
-                            </p>
-                          )}
-                          {obj___.name == "Select Flavour" && (
-                            <p className="ml-1 scale-[0.8]">
-                              {selectedFlavour_ &&
-                              obj___.name == "Select Flavour"
-                                ? selectedFlavour_
-                                : obj___.name}
-                            </p>
-                          )}
-                          {obj___.name == "Topper" && (
-                            <p className="ml-1 scale-[0.8]">
-                              {topper_ && obj___.name == "Topper"
-                                ? "Topper Selected"
-                                : obj___.name}
-                            </p>
-                          )}
+                  ].map((obj___, index___) => {
+                    return (
+                      <div
+                        className={`min-w-[40%] min-h-2 py-1 my-1 flex flex-row justify-center items-start bg-white/90 hover:bg-red-600/80 hover:text-white/80 text-black/80 transition-all hover:duration-100 backdrop-blur-md rounded-md ${
+                          menu_
+                            ? "opacity-0 pointer-events-none"
+                            : "opacity-100 pointer-events-auto"
+                        } cursor-pointer`}
+                        key={index___}
+                        onClick={obj___.func}
+                      >
+                        <input
+                          type="file"
+                          id="file"
+                          ref={inputFile}
+                          // onChange={onSelectFile}
+                          accept="image/png, image/jpeg, image/webp"
+                          style={{ display: "none" }}
+                        />
+                        <div className="w-full min-h-2 flex flex-col justify-center items-center">
+                          <div className="w-full flex flex-row justify-center items-center">
+                            {obj___.name == "Select Size" && (
+                              <p className="ml-1 scale-[0.8]">
+                                {selectedSize_ && obj___.name == "Select Size"
+                                  ? selectedSize_ == "lg"
+                                    ? "Size: Large"
+                                    : selectedSize_ == "md"
+                                    ? "Size: Medium"
+                                    : "Size: Small"
+                                  : obj___.name}
+                              </p>
+                            )}
+                            {obj___.name == "Select Flavour" && (
+                              <p className="ml-1 scale-[0.8]">
+                                {selectedFlavour_ &&
+                                obj___.name == "Select Flavour"
+                                  ? selectedFlavour_
+                                  : obj___.name}
+                              </p>
+                            )}
+                            {obj___.name == "Topper" && (
+                              <p className="ml-1 scale-[0.8]">
+                                {topper_ && obj___.name == "Topper"
+                                  ? "Topper Selected"
+                                  : obj___.name}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <div
+                          className={`min-w-2 h-full flex flex-col justify-center items-center pr-3`}
+                        >
+                          <FontAwesomeIcon
+                            icon={faAngleDown}
+                            className={`text-[10px]`}
+                          />
                         </div>
                       </div>
-                      <div
-                        className={`min-w-2 h-full flex flex-col justify-center items-center pr-3`}
-                      >
-                        <FontAwesomeIcon
-                          icon={faAngleDown}
-                          className={`text-[10px]`}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-                <div
-                  className={`absolute top-0 left-0 backdrop-blur-md w-full h-full flex flex-col justify-center items-center transition-all ${
-                    menu_
-                      ? "opacity-100 pointer-events-auto duration-200"
-                      : "opacity-0 pointer-events-none duration-75"
-                  } ${offer_ && offer_.type == 'Cake' ? 'opacity-100' : 'opacity-0'}`}
-                >
-                  {/* <div
-                    className={`min-w-2 h-full flex flex-col justify-start pt-2 items-center pr-3 absolute top-0 right-0`}
-                    onClick={() => setMenu_("")}
+                    );
+                  })}
+                  <div
+                    className={`absolute top-0 left-0 backdrop-blur-md w-full h-full flex flex-col justify-center items-center transition-all ${
+                      menu_
+                        ? "opacity-100 pointer-events-auto duration-200"
+                        : "opacity-0 pointer-events-none duration-75"
+                    }`}
                   >
-                    <FontAwesomeIcon icon={faTimes} className={`text-[15px]`} />
-                  </div> */}
-                  {offer_ && offer_.type == 'Cake' &&
-                    menu_ == "Size" &&
-                    transformList(offer_.price).map((obj____, index____) => {
-                      return (
-                        <div
-                          className="min-w-[40%] min-h-2 py-1 my-1 flex flex-row justify-center items-start bg-white/90 hover:bg-red-600/80 hover:text-white/80 text-black/80 transition-all hover:duration-100 backdrop-blur-md rounded-md cursor-pointer"
-                          key={index____}
-                          onClick={() => {
-                            setSelectedSize_(obj____.name);
-                            setMenu_("");
-                          }}
-                        >
-                          <div className="w-full min-h-2 flex flex-col justify-center items-center">
-                            <div className="w-full flex flex-row justify-center items-center">
+                    {offer_ &&
+                      offer_.type == "Cake" &&
+                      menu_ == "Size" &&
+                      transformList(offer_.price).map((obj____, index____) => {
+                        return (
+                          <div
+                            className="min-w-[40%] min-h-2 py-1 my-1 flex flex-row justify-center items-start bg-white/90 hover:bg-red-600/80 hover:text-white/80 text-black/80 transition-all hover:duration-100 backdrop-blur-md rounded-md cursor-pointer"
+                            key={index____}
+                            onClick={() => {
+                              setSelectedSize_(obj____.name);
+                              setMenu_("");
+                            }}
+                          >
+                            <div className="w-full min-h-2 flex flex-col justify-center items-center">
+                              <div className="w-full flex flex-row justify-center items-center">
+                                <p className="ml-1 scale-[0.8]">
+                                  {obj____.name == "lg"
+                                    ? "Large"
+                                    : obj____.name == "md"
+                                    ? "Medium"
+                                    : "Small"}
+                                </p>
+                              </div>
+                            </div>
+                            <div
+                              className={`min-w-[50px] h-full flex flex-col justify-center items-end pr-1`}
+                            >
                               <p className="ml-1 scale-[0.8]">
-                                {obj____.name == "lg"
-                                  ? "Large"
-                                  : obj____.name == "md"
-                                  ? "Medium"
-                                  : "Small"}
+                                R {obj____.value}
                               </p>
                             </div>
                           </div>
+                        );
+                      })}
+                    {offer_ &&
+                      offer_.type == "Cake" &&
+                      menu_ == "Flavour" &&
+                      offer_.flavours.map((obj____: any, index____: any) => {
+                        return (
                           <div
-                            className={`min-w-[50px] h-full flex flex-col justify-center items-end pr-1`}
+                            className="min-w-[40%] min-h-2 py-1 my-1 flex flex-row justify-center items-start bg-white/90 hover:bg-red-600/80 hover:text-white/80 text-black/80 transition-all hover:duration-100 backdrop-blur-md rounded-md cursor-pointer"
+                            key={index____}
+                            onClick={() => {
+                              setSelectedFlavour_(obj____);
+                              setMenu_("");
+                            }}
                           >
-                            <p className="ml-1 scale-[0.8]">
-                              R {obj____.value}
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  {offer_ && offer_.type == 'Cake' &&
-                    menu_ == "Flavour" &&
-                    offer_.flavours.map((obj____: any, index____: any) => {
-                      return (
-                        <div
-                          className="min-w-[40%] min-h-2 py-1 my-1 flex flex-row justify-center items-start bg-white/90 hover:bg-red-600/80 hover:text-white/80 text-black/80 transition-all hover:duration-100 backdrop-blur-md rounded-md cursor-pointer"
-                          key={index____}
-                          onClick={() => {
-                            setSelectedFlavour_(obj____);
-                            setMenu_("");
-                          }}
-                        >
-                          <div className="w-full min-h-2 flex flex-col justify-center items-center">
-                            <div className="w-full flex flex-row justify-center items-center">
-                              <p className="ml-1 scale-[0.8]">{obj____}</p>
+                            <div className="w-full min-h-2 flex flex-col justify-center items-center">
+                              <div className="w-full flex flex-row justify-center items-center">
+                                <p className="ml-1 scale-[0.8]">{obj____}</p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                  </div>
                 </div>
-              </div>
+              )}
               <div
-                className={`w-[255px] h-[50px] transition-all duration-75 hover:duration-500 border-solid rounded-[3px] m-1 cursor-pointer flex-row justify-center items-center ${
+                className={`w-[255px] h-[50px] transition-all duration-75 hover:duration-500 border-solid rounded-[3px] m-1 cursor-pointer flex-row justify-center items-center mt-12 ${
                   offer_ && offer_.type == "Bulk" ? "flex" : "hidden"
                 }`}
               >
@@ -365,18 +365,44 @@ const ItemView_ = () => {
               <div
                 className={`w-[255px] h-[50px] border-[1px] bg-red-600 border-red-600/30 transition-all duration-75 hover:duration-500 border-solid rounded-[3px] m-1 relative top-4 cursor-pointer flex flex-col justify-center items-center`}
                 onClick={() => {
-                  setProducts_([
-                    {
-                      name: offer_.product,
-                      quantity: quantity_,
-                      size: size_,
-                      price: price_,
-                      subtotal: quantity_ * price_,
-                    },
-                    ...products_,
-                  ]);
-
-                  setQuantity_(1);
+                  if(offer_.type == 'Cake'){
+                    setProducts_([
+                      {
+                        name: offer_.title,
+                        quantity: quantity_,
+                        size: selectedSize_,
+                        flavour: selectedFlavour_,
+                        topper: topper_,
+                        price:
+                          selectedSize_ && topper_
+                            ? offer_.price[selectedSize_] + 136
+                            : offer_.price[selectedSize_],
+                        subtotal:
+                          selectedSize_ && topper_
+                            ? offer_.price[selectedSize_] + 136
+                            : offer_.price[selectedSize_],
+                      },
+                      ...products_,
+                    ]);
+  
+                    setQuantity_(1);
+                    setBucket_("2L")
+                  }
+                  if(offer_.type == 'Bulk'){
+                    setProducts_([
+                      {
+                        name: offer_.title,
+                        quantity: quantity_,
+                        size: size_,
+                        price: price_,
+                        subtotal: quantity_ * price_,
+                      },
+                      ...products_,
+                    ]);
+  
+                    setQuantity_(1);
+                    setBucket_("2L")
+                  }
                   setViewItem_(false);
                   setCart_(true);
                 }}
