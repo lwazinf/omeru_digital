@@ -66,7 +66,7 @@ const Search_ = () => {
           }`}
           onClick={() => {
             setSideBar_(!sideBar_);
-            setCart_(false)
+            setCart_(false);
           }}
         >
           <FontAwesomeIcon icon={faBars} />
@@ -77,7 +77,7 @@ const Search_ = () => {
           }`}
           onClick={() => {
             setCart_(!cart_);
-            setSideBar_(false)
+            setSideBar_(false);
           }}
         >
           <FontAwesomeIcon icon={faCartShopping} />
@@ -87,16 +87,16 @@ const Search_ = () => {
             cart_ && "animate-pulse"
           }`}
           onClick={() => {
-            if(user_){
+            if (user_) {
               // signOut_()
-              setUser_(null)
-            }else{
+              setUser_(null);
+            } else {
               signIn_().then((user_) => {
-                setUser_(user_)
+                setUser_(user_);
               });
             }
-            setCart_(false)
-            setSideBar_(true)
+            setCart_(false);
+            setSideBar_(true);
           }}
         >
           <FontAwesomeIcon icon={user_ ? faSignOut : faUser} />

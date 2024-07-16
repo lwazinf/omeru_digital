@@ -9,6 +9,7 @@ import Model_ from "./components/Model_";
 import Footer_ from "./components/Footer_";
 import SideBar_ from "./components/SideBar_";
 import SideBarTrigger_, { CartTrigger_ } from "./components/SideBarTrigger_";
+import PaymentNotif_ from "./components/PaymentNotif_";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={inter.className}><RecoilRoot>
         {children}
         <ItemView_ />
+      <PaymentNotif_/>
         <CartTrigger_/>
         <Model_/>
         <SideBarTrigger_/>

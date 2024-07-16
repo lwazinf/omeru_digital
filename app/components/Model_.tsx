@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { CartState, ProductsState, UserState } from "./atoms/atoms";
+import { CartState, ProductsState, UserState, PaidState, SideBarState } from "./atoms/atoms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { serverTimestamp } from "firebase/firestore";
 import { v4 } from "uuid";
-import { updateCart_ } from "./utils/utils";
+import { signIn_, updateCart_ } from "./utils/utils";
 import { useRouter } from "next/navigation";
 
 interface Model_Props {}
@@ -20,6 +20,8 @@ const Model_ = () => {
   const [products_, setProducts_] = useRecoilState(ProductsState);
   const [user_, setUser_] = useRecoilState(UserState);
   const [cart_, setCart_] = useRecoilState(CartState);
+  const [sideBar_, setSideBar_] = useRecoilState(SideBarState);
+  const [paid_, setPaid_] = useRecoilState(PaidState);
 
   const router = useRouter();
 
@@ -32,30 +34,11 @@ const Model_ = () => {
     return x;
   };
 
-  const testData_ = async (amount: number) => {
-    const data = {
-      amount: amount
-    };
-    try {
-      const response = await fetch('/api/paymentService', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      const data_ = await response.json();
-      return data_;
-    } catch(error) {
-      console.error(error);
-    }
-  };
-  
   const handleClick = async () => {
-    const data_ = await testData_(total_()*100);
-    if (data_.redirectUrl) {
-      window.open(data_.redirectUrl, "_blank");
-    }
+    console.log(total_());
+    // if (data_.redirectUrl) {
+    //   window.open(data_.redirectUrl, "_blank");
+    // }
   };
 
   return (
@@ -68,7 +51,7 @@ const Model_ = () => {
     >
       <div className={`md:w-[350px] w-full min-h-screen absolute top-0 left-0`}>
         <img
-        //   src={`/assets/images/bg.png`}
+          //   src={`/assets/images/bg.png`}
           className={`flex-col flex items-center justify-center w-full min-h-screen pointer-events-none`}
           style={{
             backgroundImage: `url(${"/assets/images/bg.png"})`,
@@ -144,25 +127,34 @@ const Model_ = () => {
         <div
           className={`font-black text-white w-[100%] h-full border-[1px] bg-red-600 border-red-600/30 transition-all duration-75 hover:duration-500 border-solid rounded-[3px] flex flex-row cursor-pointer justify-center items-center`}
           onClick={() => {
-            handleClick()
-          const uid_ = v4();
-          const timestamp_ = serverTimestamp();
-          const data_ = {
-            receipt: {
-              time: timestamp_,
-              id: uid_,
-              paid: true,
-              fulfilled: false,
-              total: total_(),
-              user: user_.uid,
-              name: user_.displayName,
-              products: products_,
-            },
-          };
-          // updateCart_(data_, data_.receipt.user, () => {
-          //   console.log("Data Sent");
-          // });
-          console.log(data_)
+            // if (user_) {
+            //   handleClick();
+            //   const uid_ = v4();
+            //   const timestamp_ = serverTimestamp();
+            //   const data_ = {
+            //     receipt: {
+            //       time: timestamp_,
+            //       id: uid_,
+            //       paid: true,
+            //       fulfilled: false,
+            //       total: total_(),
+            //       user: user_ && user_.uid,
+            //       name: user_ && user_.displayName,
+            //       products: products_,
+            //     },
+            //   };
+            //   // updateCart_(data_, data_.receipt.user, () => {
+            //   //   console.log("Data Sent");
+            //   // });
+            //   console.log(data_);
+            // } else {
+            //   signIn_().then((user_) => {
+            //     setUser_(user_);
+            //   });
+            // }
+            setPaid_(true)
+            setCart_(false)
+            setSideBar_(true)
           }}
         >
           Proceed to payment

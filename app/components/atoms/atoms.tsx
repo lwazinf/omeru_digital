@@ -12,6 +12,11 @@ export const AdminState = atom<any>({
   default: false,
 });
 
+export const PaidState = atom<any>({
+  key: `${COMPONENT_NAME}/PaidState`,
+  default: false,
+});
+
 export const OfferState2 = atom<any>({
   key: `${COMPONENT_NAME}/OfferState2`,
   default: null,
