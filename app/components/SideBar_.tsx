@@ -1,16 +1,23 @@
 import { useRecoilState } from "recoil";
-import { SideBarState, ProductsState, UserState } from "./atoms/atoms";
+import {
+  SideBarState,
+  ProductsState,
+  UserState,
+  AdminState,
+} from "./atoms/atoms";
 import { Logo_, Social_ } from "./Logo_";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface SideBar_Props {}
 
 const SideBar_ = () => {
   const [sideBar_, setSideBar_] = useRecoilState(SideBarState);
   const [promote_, setPromote_] = useState(false);
+  const [newPromo_, setNewPromo_] = useState(false);
   const [images_, setImages_] = useState<any>(null);
+  const [admin_, setAdmin_] = useRecoilState(AdminState);
 
   const inputFile = useRef<HTMLInputElement>(null);
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +26,11 @@ const SideBar_ = () => {
       setImages_(selectedFile[0]);
     }
   };
+
+  useEffect(() => {
+    setPromote_(false);
+    setNewPromo_(false)
+  }, [sideBar_])
 
   return (
     <div
@@ -61,7 +73,7 @@ const SideBar_ = () => {
               : "opacity-100 duration-[200ms] pointer-events-none"
           }`}
           onClick={() => {
-            if(!promote_){
+            if (!promote_) {
               setPromote_(true);
             }
           }}
@@ -73,86 +85,124 @@ const SideBar_ = () => {
               // featured_[feature_]
             }
           />
-          <div
-            className={`w-full h-full bg-white/50 backdrop-blur-md absolute top-0 left-0 flex flex-col justify-center items-center transition-all duration-75
+          {admin_ && (
+            <div
+              className={`w-full h-full bg-white/50 backdrop-blur-md absolute top-0 left-0 flex flex-col ${
+                !newPromo_ ? 'justify-start' : 'justify-center'
+                } items-center transition-all duration-75
               ${
                 promote_
                   ? "opacity-100 pointer-events-auto"
                   : "opacity-0 pointer-events-none"
               }`}
-          >
-            <div
-              className={`bg-white/50 backdrop-blur-md w-[250px] h-[260px] rounded-md cursor-pointer relative overflow-hidden`}
-              onClick={() => {
-                inputFile.current && inputFile.current.click();
-              }}
             >
-              <input
-                type="file"
-                id="file"
-                ref={inputFile}
-                onChange={onSelectFile}
-                accept="image/png, image/jpeg, image/webp"
-                style={{ display: "none" }}
-              />
-              <img
-                className={`w-full h-full object-cover transition-all ${
-                  images_
-                    ? "opacity-100 duration-200"
-                    : "opacity-0 duration-500"
+              {
+                !newPromo_ && <div className={`w-full min-h-2 grid grid-cols-2 gap-1 gap-y-[4px] p-2 justify-start items-start overflow-scroll`}>
+                  {[1, 2, 3, 4].map((obj_, index_) => {
+                    return <div className={`h-[123px] w-full bg-white/70 rounded-[3px] cursor-pointer`} key={index_}/>
+                  })}
+                  <div className={`h-[123px] w-full bg-white/70 rounded-[3px] flex flex-col justify-center items-center invert hover:invert-0 transition-all duration-75 cursor-pointer`}
+                  onClick={() => {
+                    setNewPromo_(true)
+                  }}>
+                    <FontAwesomeIcon icon={faAdd} className={``}/>
+                  </div>
+                </div>
+              }
+              {
+                newPromo_ && <div className={`w-full h-full flex flex-col justify-center items-center`}>
+                  <div
+                className={`bg-white/50 backdrop-blur-md w-[250px] h-[260px] rounded-md cursor-pointer relative overflow-hidden ${
+                  promote_
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none"
                 }`}
-                src={images_ ? URL.createObjectURL(images_) : ""}
-                alt="Selected"
-              />
-            </div>
-            <div
-              className={`w-[250px] min-h-[150px] flex flex-col justify-start items-center pt-2`}
-            >
-              <div
-                className={`bg-white/50 backdrop-blur-md w-[250px] h-[40px] rounded-md flex flex-col justify-center items-center`}
-              >
-                <input
-                  className="text-[14px] font-medium text-start opacity-100 pointer-events-auto"
-                  maxLength={25}
-                  type="text"
-                  placeholder="Promotional Link"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                    }
-                  }}
-                  onChange={(e) => {}}
-                />
-              </div>
-              <div
-                className={`bg-white/50 backdrop-blur-md w-[250px] min-h-[80px] mt-2 py-2 rounded-md flex flex-col justify-center items-center`}
-              >
-                <textarea
-                  className={`mb-[1.5px] text-[14px] font-medium text-start h-[90px]`}
-                  maxLength={140}
-                  placeholder={`Promotional Instruction`}
-                  onChange={(e) => {}}
-                />
-              </div>
-            </div>
-            <div
-              className={`flex flex-row justify-center items-center w-full min-h-2`}
-            >
-              <div
-                className={`flex flex-col justify-center items-center relative left-[17px] cursor-pointer hover:bg-black/80 transition-all duration-75 hover:text-white bg-white/60 text-black rounded-[4px] w-[100px] h-[50px] scale-[0.8]`}
                 onClick={() => {
-                  setPromote_(false)
+                  inputFile.current && inputFile.current.click();
                 }}
               >
-                <FontAwesomeIcon icon={faAngleLeft} className={``} />
+                <input
+                  type="file"
+                  id="file"
+                  ref={inputFile}
+                  onChange={onSelectFile}
+                  accept="image/png, image/jpeg, image/webp"
+                  style={{ display: "none" }}
+                />
+                <img
+                  className={`w-full h-full object-cover transition-all ${
+                    images_
+                      ? "opacity-100 duration-200"
+                      : "opacity-0 duration-500"
+                  }`}
+                  src={images_ ? URL.createObjectURL(images_) : ""}
+                  alt="Selected"
+                />
               </div>
               <div
-                className={`w-[255px] h-[50px] border-[1px] hover:border-white/50 border-red-600/50 bg-red-600 hover:bg-white text-white hover:text-black/80 transition-all duration-75 border-solid rounded-[4px] m-1 cursor-pointer flex flex-col justify-center items-center scale-[0.8] relative right-1`}
-                onClick={() => {}}
+                className={`w-[250px] min-h-[150px] flex flex-col justify-start items-center pt-2 ${
+                  promote_
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none"
+                }`}
               >
-                <p className={`font-black`}>Promote</p>
+                <div
+                  className={`bg-white/50 backdrop-blur-md w-[250px] h-[40px] rounded-md flex flex-col justify-center items-center`}
+                >
+                  <input
+                    className={`text-[14px] font-medium text-start ${
+                      promote_
+                        ? "opacity-100 pointer-events-auto"
+                        : "opacity-0 pointer-events-none"
+                    }`}
+                    maxLength={25}
+                    type="text"
+                    placeholder="Promotional Link"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                      }
+                    }}
+                    onChange={(e) => {}}
+                  />
+                </div>
+                <div
+                  className={`bg-white/50 backdrop-blur-md w-[250px] min-h-[80px] mt-2 py-2 rounded-md flex flex-col justify-center items-center`}
+                >
+                  <textarea
+                    className={`mb-[1.5px] text-[14px] font-medium text-start h-[90px]`}
+                    maxLength={140}
+                    placeholder={`Promotional Instruction`}
+                    onChange={(e) => {}}
+                  />
+                </div>
               </div>
+              <div
+                className={`flex flex-row justify-center items-center w-full min-h-2 ${
+                  promote_
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                <div
+                  className={`flex flex-col justify-center items-center relative left-[17px] cursor-pointer hover:bg-black/80 transition-all duration-75 hover:text-white bg-white/60 text-black rounded-[4px] w-[100px] h-[50px] scale-[0.8]`}
+                  onClick={() => {
+                    // setPromote_(false);
+                    setNewPromo_(false)
+                  }}
+                >
+                  <FontAwesomeIcon icon={faAngleLeft} className={``} />
+                </div>
+                <div
+                  className={`w-[255px] h-[50px] border-[1px] hover:border-white/50 border-red-600/50 bg-red-600 hover:bg-white text-white hover:text-black/80 transition-all duration-75 border-solid rounded-[4px] m-1 cursor-pointer flex flex-col justify-center items-center scale-[0.8] relative right-1`}
+                  onClick={() => {}}
+                >
+                  <p className={`font-black`}>Promote</p>
+                </div>
+              </div>
+                </div>
+              }
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

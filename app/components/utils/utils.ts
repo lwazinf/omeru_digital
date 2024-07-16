@@ -12,14 +12,26 @@ import {
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { v4 } from "uuid";
 
+// Sign in using Google
 export const signIn_ = async () => {
-  return signInWithPopup(auth, provider).then((data) => {
-    return data?.user;
-  });
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result?.user;
+  } catch (error) {
+    console.error("Error signing in:", error);
+    throw error;
+  }
 };
 
-export const signOut_ = () => {
-  return signOut(auth);
+// Sign out
+export const signOut_ = async () => {
+  try {
+    await signOut(auth);
+    console.log("Signed out successfully");
+  } catch (error) {
+    console.error("Error signing out:", error);
+    throw error;
+  }
 };
 
 export const updateCart_ = (data_: any, userID_: string, onSuccess: any) => {

@@ -7,6 +7,11 @@ export const UserState = atom<any>({
   default: null,
 });
 
+export const AdminState = atom<any>({
+  key: `${COMPONENT_NAME}/AdminState`,
+  default: false,
+});
+
 export const OfferState2 = atom<any>({
   key: `${COMPONENT_NAME}/OfferState2`,
   default: null,

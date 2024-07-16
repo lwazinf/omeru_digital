@@ -17,6 +17,7 @@ import {
   OfferState2,
   CartState,
   SideBarState,
+  AdminState,
 } from "./atoms/atoms";
 import {
   AddProduct_,
@@ -33,6 +34,7 @@ interface Product_Props {
 export const Product_ = ({ data_ }: Product_Props) => {
   const [card_, setCard_] = useState(false);
   const [offers_, setOffers_] = useRecoilState(OfferState);
+  const [admin_, setAdmin_] = useRecoilState(AdminState);
   const [viewItem_, setViewItem_] = useRecoilState(ViewItemState);
   const [offer_, setOffer_] = useRecoilState(OfferState2);
   const [currentItem_, setCurrentItem_] = useRecoilState(CurrentItemState);
@@ -141,7 +143,7 @@ export const Product_ = ({ data_ }: Product_Props) => {
           ></div>
         </div>
       </div>
-      <div
+      {admin_ && <div
         className={`w-6 h-6 flex flex-col justify-center items-center absolute top-8 bg-white/50 hover:bg-white/80 backdrop-blur-md rounded-[50%] left-6 cursor-pointer text-[12px] text-red-600/60 hover:text-red-600 transition-all duration-200`}
         onClick={async () => {
           await DeleteProduct_(data_, () => {
@@ -152,7 +154,7 @@ export const Product_ = ({ data_ }: Product_Props) => {
         }}
       >
         <FontAwesomeIcon icon={faTrash} />
-      </div>
+      </div>}
     </div>
   );
 };
@@ -163,6 +165,7 @@ interface Cake_Props {
 
 export const Cake_ = ({ data_ }: Cake_Props) => {
   const [card_, setCard_] = useState(false);
+  const [admin_, setAdmin_] = useRecoilState(AdminState);
   const [offers_, setOffers_] = useRecoilState(OfferState);
   const [offer_, setOffer_] = useRecoilState(OfferState2);
   const [viewItem_, setViewItem_] = useRecoilState(ViewItemState);
@@ -272,7 +275,7 @@ export const Cake_ = ({ data_ }: Cake_Props) => {
           ></div>
         </div>
       </div>
-      <div
+      {admin_ && <div
         className={`w-6 h-6 flex flex-col justify-center items-center absolute top-8 bg-white/50 hover:bg-white/80 backdrop-blur-md rounded-[50%] left-6 cursor-pointer text-[12px] text-red-600/60 hover:text-red-600 transition-all duration-200`}
         onClick={async () => {
           await DeleteProduct_(data_, () => {
@@ -283,7 +286,7 @@ export const Cake_ = ({ data_ }: Cake_Props) => {
         }}
       >
         <FontAwesomeIcon icon={faTrash} />
-      </div>
+      </div>}
     </div>
   );
 };

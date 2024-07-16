@@ -1,7 +1,7 @@
 "use client";
 
 import { useRecoilState } from "recoil";
-import { SearchState, OfferState, CollectionState } from "./atoms/atoms";
+import { SearchState, OfferState, CollectionState, UserState, AdminState } from "./atoms/atoms";
 import { Cake_, Product_ } from "./Product_";
 import Search_ from "./Search_";
 import Pills_ from "./Pills_";
@@ -50,9 +50,10 @@ const Offers_ = () => {
   const [offers_, setOffers_] = useRecoilState(OfferState);
   const [searchPhrase_, setSearchPhrase_] = useRecoilState(SearchState);
   const [collection_, setCollection_] = useRecoilState(CollectionState);
+  const [admin_, setAdmin_] = useRecoilState(AdminState);
   return (
     <div className={`grid grid-cols-4 gap-4 mb-8`}>
-      {[1].map((obj_, index) => {
+      {admin_ &&[1].map((obj_, index) => {
         return <InitProduct_ key={index} />;
       })}
       {offers_.map((obj_: any, index: any) => {

@@ -62,8 +62,8 @@ const Model_ = () => {
     <div
       className={`md:w-[350px] w-full min-h-screen bg-white/60 backdrop-blur-lg ${
         cart_
-          ? "opacity-100 duration-500 right-0"
-          : "opacity-100 duration-200 right-[-100%]"
+          ? "opacity-100 duration-200 right-0"
+          : "opacity-100 duration-500 right-[-100%]"
       } transition-all flex flex-col items-center justify-center pb-8 fixed top-0 shadow-lg`}
     >
       <div className={`md:w-[350px] w-full min-h-screen absolute top-0 left-0`}>
@@ -159,9 +159,9 @@ const Model_ = () => {
               products: products_,
             },
           };
-          updateCart_(data_, data_.receipt.user, () => {
-            console.log("Data Sent");
-          });
+          // updateCart_(data_, data_.receipt.user, () => {
+          //   console.log("Data Sent");
+          // });
           console.log(data_)
           }}
         >

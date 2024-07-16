@@ -1,20 +1,22 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CartState, SearchState, SideBarState } from "./atoms/atoms";
+import { CartState, SearchState, SideBarState, UserState } from "./atoms/atoms";
 import {
   faArrowRotateLeft,
   faBars,
   faBasketShopping,
   faCartShopping,
   faSearch,
+  faSignOut,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { signIn_ } from "./utils/utils";
+import { signIn_, signOut_ } from "./utils/utils";
 
 const Search_ = () => {
+  const [user_, setUser_] = useRecoilState(UserState);
   const [searchPhrase_, setSearchPhrase_] = useRecoilState(SearchState);
   const [cart_, setCart_] = useRecoilState(CartState);
   const [sideBar_, setSideBar_] = useRecoilState(SideBarState);
@@ -64,6 +66,7 @@ const Search_ = () => {
           }`}
           onClick={() => {
             setSideBar_(!sideBar_);
+            setCart_(false)
           }}
         >
           <FontAwesomeIcon icon={faBars} />
@@ -74,6 +77,7 @@ const Search_ = () => {
           }`}
           onClick={() => {
             setCart_(!cart_);
+            setSideBar_(false)
           }}
         >
           <FontAwesomeIcon icon={faCartShopping} />
@@ -83,10 +87,19 @@ const Search_ = () => {
             cart_ && "animate-pulse"
           }`}
           onClick={() => {
-            signIn_();
+            if(user_){
+              // signOut_()
+              setUser_(null)
+            }else{
+              signIn_().then((user_) => {
+                setUser_(user_)
+              });
+            }
+            setCart_(false)
+            setSideBar_(true)
           }}
         >
-          <FontAwesomeIcon icon={faUser} />
+          <FontAwesomeIcon icon={user_ ? faSignOut : faUser} />
         </div>
       </div>
     </div>
