@@ -7,6 +7,11 @@ export const UserState = atom<any>({
   default: null,
 });
 
+export const BucketState = atom<any>({
+  key: `${COMPONENT_NAME}/BucketState`,
+  default: "2L",
+});
+
 export const AdminState = atom<any>({
   key: `${COMPONENT_NAME}/AdminState`,
   default: false,

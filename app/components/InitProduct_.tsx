@@ -575,6 +575,7 @@ const InitProduct_ = () => {
                 setParamSet_(!paramSet_);
               } else if (idx_ === 5) {
                 console.log(5);
+        setPromptComplete_(true);
                 const newOffer = {
                   id: v4(),
                   title: title_,

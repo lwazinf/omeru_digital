@@ -2,6 +2,7 @@
 
 import { useRecoilState } from "recoil";
 import {
+  BucketState,
   CartState,
   CurrentItemState,
   OfferState2,
@@ -24,7 +25,7 @@ const ItemView_ = () => {
   const [price_, setPrice_] = useState(0);
 
   const [newDesc_, setNewDesc_] = useState("");
-  const [bucket_, setBucket_] = useState("2L");
+  const [bucket_, setBucket_] = useRecoilState(BucketState);
 
   const init = () => offer_ && setPrice_(offer_.price[2]);
 
@@ -137,7 +138,6 @@ const CakeItem_ = ({ offer_ }: CakeItem_Props) => {
   const [products_, setProducts_] = useRecoilState(ProductsState);
   const [topper_, setTopper_] = useState(false);
   const [selectedFlavour_, setSelectedFlavour_] = useState("");
-  const [bucket_, setBucket_] = useState("2L");
   const [quantity_, setQuantity_] = useState(1);
   const [menu_, setMenu_] = useState("");
 
@@ -381,7 +381,7 @@ const BulkItem_ = ({ offer_ }: BulkItem_Props) => {
   const [cart_, setCart_] = useRecoilState(CartState);
   const [products_, setProducts_] = useRecoilState(ProductsState);
   const [quantity_, setQuantity_] = useState(0);
-  const [bucket_, setBucket_] = useState("2L");
+  const [bucket_, setBucket_] = useRecoilState(BucketState);
   const [price_, setPrice_] = useState(0);
   const [menu_, setMenu_] = useState("");
 
