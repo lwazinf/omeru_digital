@@ -147,9 +147,10 @@ export const Product_ = ({ data_ }: Product_Props) => {
         className={`w-6 h-6 flex flex-col justify-center items-center absolute top-8 bg-white/50 hover:bg-white/80 backdrop-blur-md rounded-[50%] left-6 cursor-pointer text-[12px] text-red-600/60 hover:text-red-600 transition-all duration-200`}
         onClick={async () => {
           await DeleteProduct_(data_, () => {
+            console.log("Document deleted.");
+          }).then(() => {
             console.log("Reinitializing Products..");
             initProducts_();
-            console.log("Document deleted.");
           });
         }}
       >
