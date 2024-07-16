@@ -33,27 +33,27 @@ const PaymentNotif_ = () => {
             />
             <p className={`font-medium ml-2 text-[18px]`}>Purchase Made</p>
           </div>
-          <FontAwesomeIcon icon={faTimes} className={`m-8`} />
+          <FontAwesomeIcon icon={faTimes} className={`m-8 cursor-pointer hover:opacity-60 opacity-100 transition-all duration-200`} onClick={() => {
+                setPaid_(false)
+              }} />
         </div>
         <div
           className={`w-[90%] h-[1px] bg-black/10 flex flex-row justify-between items-center`}
         ></div>
         <div
-          className={`w-full min-h-12 flex flex-row justify-between items-center`}
+          className={`w-full min-h-12 flex flex-row justify-between items-center pt-2`}
         >
           <div
-            className={`min-w-2 min-h-2 flex flex-row justify-between items-center`}
+            className={`w-full min-h-2 flex flex-row justify-center items-center`}
           >
             <img
-              className={`cursor-pointer w-[80px] ml-4 transition-all duration-200 pointer-events-none`}
-              src={`/assets/images/xbakeslogo.png`}
+              className={`cursor-pointer w-[99%] h-full transition-all duration-200 pointer-events-none rounded`}
+              src={`https://images.pexels.com/photos/7563647/pexels-photo-7563647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
               onClick={() => {
                 //   router.push("/");
               }}
             />
-            <p className={`font-medium ml-2 text-[18px]`}>Purchase Made</p>
           </div>
-          <FontAwesomeIcon icon={faTimes} className={`m-8`} />
         </div>
       </div>
     </div>
