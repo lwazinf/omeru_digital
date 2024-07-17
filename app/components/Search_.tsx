@@ -23,7 +23,7 @@ const Search_ = () => {
   const [searchTemp_, setSearchTemp_] = useState("");
   return (
     <div
-      className={`md:w-[550px] w-[200px] h-[35px] border-solid border-[1px] border-black/25 rounded-[4px] flex flex-row justify-center items-center relative mb-4`}
+      className={`md:w-[550px] w-[200px] h-[35px] border-solid border-[1px] border-black/25 rounded-[4px] flex-row justify-center items-center relative mb-4 hidden md:flex`}
     >
       <FontAwesomeIcon
         icon={faSearch}

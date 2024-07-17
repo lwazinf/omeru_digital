@@ -47,7 +47,7 @@ const Model_ = () => {
         cart_
           ? "opacity-100 duration-200 right-0"
           : "opacity-100 duration-500 right-[-100%]"
-      } transition-all flex flex-col items-center justify-center pb-8 fixed top-0 shadow-lg`}
+      } transition-all flex-col items-center justify-center pb-8 fixed top-0 shadow-lg hidden md:flex`}
     >
       <div className={`md:w-[350px] w-full min-h-screen absolute top-0 left-0`}>
         <img

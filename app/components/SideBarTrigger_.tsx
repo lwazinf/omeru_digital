@@ -11,7 +11,7 @@ const SideBarTrigger_ = () => {
   const [cart_, setCart_] = useRecoilState(CartState);
   return (
     <div
-      className={`w-[60px] min-h-screen fixed left-0 top-0 flex flex-col justify-start items-center pt-[80px] opacity-50`}
+      className={`w-[60px] min-h-screen fixed left-0 top-0 flex-col justify-start items-center pt-[80px] opacity-50 hidden md:flex`}
       onMouseEnter={() => {
         setSideBar_(true);
         setCart_(false);
@@ -34,7 +34,7 @@ export const CartTrigger_ = () => {
   const [cart_, setCart_] = useRecoilState(CartState);
     return (
       <div
-        className={`w-[60px] min-h-screen fixed right-0 top-0 flex flex-col justify-start items-center pb-[80px]`}
+        className={`w-[60px] min-h-screen fixed right-0 top-0 flex-col justify-start items-center pb-[80px] hidden md:flex`}
         onMouseEnter={() => {
           setCart_(true);
           setSideBar_(false);

@@ -69,11 +69,11 @@ const ItemView_ = () => {
   }, [viewItem_]);
   return (
     <div
-      className={`w-full min-h-screen flex flex-col justify-center items-center bg-white/70 backdrop-blur-md fixed top-0 left-0 transition-all ${
+      className={`w-full min-h-screen flex-col justify-center items-center bg-white/70 backdrop-blur-md fixed top-0 left-0 transition-all ${
         viewItem_
           ? "opacity-100 pointer-events-auto duration-200"
           : "opacity-0 pointer-events-none duration-500"
-      }`}
+      } hidden md:flex`}
     >
       <div
         className={`w-[1200px] h-screen flex flex-row justify-center py-8 items-center relative ${

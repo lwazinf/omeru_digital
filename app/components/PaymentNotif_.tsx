@@ -9,11 +9,11 @@ const PaymentNotif_ = () => {
   const [paid_, setPaid_] = useRecoilState(PaidState);
   return (
     <div
-      className={`w-full h-full flex flex-col justify-center items-center fixed top-0 left-0 bg-white/50 backdrop-blur-md transition-all duration-100 ${
+      className={`w-full h-full flex-col justify-center items-center fixed top-0 left-0 bg-white/50 backdrop-blur-md transition-all duration-100 ${
         paid_
           ? "pointer-events-auto opacity-100"
           : "pointer-events-none opacity-0"
-      }`}
+      } hidden md:flex`}
     >
       <div
         className={`w-[600px] h-[650px] rounded-[12px] bg-white shadow-md scale-[0.9] flex flex-col justify-start items-center overflow-hidden`}

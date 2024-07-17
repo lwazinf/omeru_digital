@@ -37,8 +37,8 @@ const SideBar_ = () => {
       className={`md:w-[250px] w-full min-h-screen bg-white/60 backdrop-blur-lg ${
         sideBar_
           ? "opacity-100 duration-200 left-0"
-          : "opacity-100 duration-500 left-[-16%]"
-      } transition-all flex flex-col items-center justify-start pb-8 fixed top-0 shadow-lg`}
+          : "opacity-100 duration-500 md:left-[-16%] left-[-100%]"
+      } transition-all flex-col items-center justify-start pb-8 fixed top-0 shadow-lg hidden sm_2:flex`}
     >
       <div className={`md:w-[250px] w-full min-h-screen absolute top-0 left-0`}>
         <img
@@ -65,7 +65,7 @@ const SideBar_ = () => {
         <Logo_ />
         <Social_ />
         <div
-          className={`flex flex-col justify-center items-center min-w-[300px] bg-red-600 relative rounded-md left-10 bottom-[-10px] h-[520px] shadow-xl overflow-hidden ${
+          className={`flex flex-col justify-center items-center md:min-w-[300px] w-[250px] bg-red-600 relative rounded-md md:left-10 bottom-[-10px] md:h-[520px] h-[350px] shadow-xl overflow-hidden ${
             !promote_ && "cursor-pointer"
           } ${
             sideBar_

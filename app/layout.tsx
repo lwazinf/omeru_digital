@@ -10,6 +10,7 @@ import Footer_ from "./components/Footer_";
 import SideBar_ from "./components/SideBar_";
 import SideBarTrigger_, { CartTrigger_ } from "./components/SideBarTrigger_";
 import PaymentNotif_ from "./components/PaymentNotif_";
+import MobileMenu_ from "./components/MobileMenu_";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,16 +26,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}><RecoilRoot>
-        {children}
-        <ItemView_ />
-      <PaymentNotif_/>
-        <CartTrigger_/>
-        <Model_/>
-        <SideBarTrigger_/>
-        <SideBar_/>
-      {/* <Footer_/> */}
-      </RecoilRoot></body>
+      <body className={inter.className}>
+        <RecoilRoot>
+          {children}
+          <ItemView_ />
+          <PaymentNotif_ />
+          <CartTrigger_ />
+          <Model_ />
+          <SideBarTrigger_ />
+          <SideBar_ />
+          <MobileMenu_ />
+        </RecoilRoot>
+      </body>
     </html>
   );
 }

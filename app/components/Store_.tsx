@@ -52,7 +52,7 @@ const Offers_ = () => {
   const [collection_, setCollection_] = useRecoilState(CollectionState);
   const [admin_, setAdmin_] = useRecoilState(AdminState);
   return (
-    <div className={`grid grid-cols-4 gap-4 mb-8`}>
+    <div className={`grid grid-cols-1 sm_2:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:mb-8`}>
       {admin_ &&[1].map((obj_, index) => {
         return <InitProduct_ key={index} />;
       })}
