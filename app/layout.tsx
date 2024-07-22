@@ -11,6 +11,7 @@ import SideBar_ from "./components/SideBar_";
 import SideBarTrigger_, { CartTrigger_ } from "./components/SideBarTrigger_";
 import PaymentNotif_ from "./components/PaymentNotif_";
 import MobileMenu_ from "./components/MobileMenu_";
+import ItemViewMobile_ from "./components/mobile/ItemView_";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,12 +31,13 @@ export default function RootLayout({
         <RecoilRoot>
           {children}
           <ItemView_ />
+          <ItemViewMobile_ />
           <PaymentNotif_ />
           <CartTrigger_ />
           <Model_ />
           <SideBarTrigger_ />
           <SideBar_ />
-          <MobileMenu_ />
+          {/* <MobileMenu_ /> */}
         </RecoilRoot>
       </body>
     </html>

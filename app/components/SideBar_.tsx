@@ -38,7 +38,7 @@ const SideBar_ = () => {
         sideBar_
           ? "opacity-100 duration-200 left-0"
           : "opacity-100 duration-500 md:left-[-16%] left-[-100%]"
-      } transition-all flex-col items-center justify-start pb-8 fixed top-0 shadow-lg hidden sm_2:flex`}
+      } transition-all flex-col items-center justify-start pb-8 fixed top-0 shadow-lg hidden md:flex`}
     >
       <div className={`md:w-[250px] w-full min-h-screen absolute top-0 left-0`}>
         <img

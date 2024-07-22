@@ -134,4 +134,20 @@ body {
     display: flex;
     transition: opacity 0.5s ease, visibility 0.5s ease, position 0.5s ease;
   }
+
+  .top_fade {
+    background: rgb(0,0,0);
+    background: -moz-linear-gradient(180deg, rgba(0,0,0,0.6741293532338308) 4%, rgba(0,0,0,0) 37%);
+    background: -webkit-linear-gradient(180deg, rgba(0,0,0,0.6741293532338308) 4%, rgba(0,0,0,0) 37%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.6741293532338308) 4%, rgba(0,0,0,0) 37%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1); 
+  }
+
+  .bottom_fade {
+    background: rgb(0,0,0);
+    background: -moz-linear-gradient(0deg, rgba(0,0,0,0.6741293532338308) 4%, rgba(0,0,0,0) 37%);
+    background: -webkit-linear-gradient(0deg, rgba(0,0,0,0.6741293532338308) 4%, rgba(0,0,0,0) 37%);
+    background: linear-gradient(0deg, rgba(0,0,0,0.6741293532338308) 4%, rgba(0,0,0,0) 37%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1); 
+  }
 }

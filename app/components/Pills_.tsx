@@ -43,7 +43,7 @@ const Pills_ = () => {
   }, [sideBar_, isSmallScreen]);
   return (
     <div
-      className={`w-full min-h-[50px] md:flex-row flex-col justify-between md:justify-center md:mt-0 mt-2 items-center flex md:relative fixed bottom-0 z-[4]`}
+      className={`w-full min-h-[50px] md:flex-row flex-col justify-between md:justify-center md:mt-0 mt-2 items-center md:flex relative hidden`}
     >
       <div className={`flex flex-row w-full pb-2 justify-center items-center`}>
         <div

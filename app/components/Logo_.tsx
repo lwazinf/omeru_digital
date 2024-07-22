@@ -5,7 +5,7 @@ export const Logo_ = () => {
     return (
       <div
         // style={{ y }}
-        className={`flex flex-col justify-center items-center w-full h-[50px] text-[30px] pointer-events-none scale-[.3] mt-9`}
+        className={`flex flex-col justify-center items-center w-full h-[50px] text-[30px] pointer-events-none md:scale-[.3] scale-[.2] mt-9`}
       >
         
         <p
@@ -34,7 +34,7 @@ export const Logo_ = () => {
   export const Social_ = () => {
     return ( 
       <div
-            className={`relative w-full h-8 grid grid-cols-4 px-[80px] gap-6 duration-[1000ms] justify-items-center items-center transition-all`}
+            className={`relative w-full h-8 grid md:grid-cols-4 grid-cols-1 md:px-[80px] gap-6 duration-[1000ms] justify-items-center items-center transition-all`}
           >
             {[
               { icon: faTwitter },
@@ -46,7 +46,7 @@ export const Logo_ = () => {
                 <FontAwesomeIcon
                   key={index}
                   icon={obj_.icon}
-                  className={`transition-all text-[20px] cursor-pointer hover:text-[#ec1d2a] hover:duration-[75ms] duration-[1000ms] text-black/80`}
+                  className={`transition-all md:text-[20px] text-[25px] cursor-pointer hover:text-[#ec1d2a] hover:duration-[75ms] duration-[1000ms] text-black/80`}
                   onClick={() => {
                     // go to twitter page
                   }}
