@@ -17,6 +17,11 @@ export const AdminState = atom<any>({
   default: false,
 });
 
+export const MobileTrayState = atom<any>({
+  key: `${COMPONENT_NAME}/MobileTrayState`,
+  default: false,
+});
+
 export const PaidState = atom<any>({
   key: `${COMPONENT_NAME}/PaidState`,
   default: false,

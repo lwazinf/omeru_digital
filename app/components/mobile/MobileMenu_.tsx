@@ -1,14 +1,15 @@
 import { faBars, faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CartState, SideBarState } from "./atoms/atoms";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
+import { CartState, MobileTrayState, SideBarState } from "../atoms/atoms";
 
 interface MobileMenu_Props {}
 
 const MobileMenu_ = () => {
     const [sideBar_, setSideBar_] = useRecoilState(SideBarState);
-    const [cart_, setCart_] = useRecoilState(CartState);
+  const [lock_, setLock_] = useRecoilState(MobileTrayState);
+  const [cart_, setCart_] = useRecoilState(CartState);
     useEffect(() => {
         
     }, [sideBar_])
@@ -18,9 +19,11 @@ const MobileMenu_ = () => {
     >
       {[
           { icon: faShoppingCart, func: () => {setCart_(!cart_)} },
-          { icon: faSearch, func: () => {} },
+          { icon: faSearch, func: () => {
+            setLock_(true)
+          } },
         { icon: faBars, func: () => {
-            setSideBar_(!sideBar_)
+            
         } },
       ].map((obj_, index_) => {
         return (
