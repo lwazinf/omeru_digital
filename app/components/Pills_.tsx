@@ -21,21 +21,6 @@ const Pills_ = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 990px)');
-    setIsSmallScreen(mediaQuery.matches);
-
-    const handleResize = () => {
-      setIsSmallScreen(window.matchMedia('(max-width: 990px)').matches);
-    };
-
-    mediaQuery.addEventListener('change', handleResize);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
     if (isSmallScreen) {
       setLock_(prevLock => !prevLock);
       console.log("Lwazi");

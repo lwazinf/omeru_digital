@@ -22,12 +22,15 @@ import Search_ from "../Search_";
 interface ItemViewMobile_Props {}
 
 const ItemViewMobile_ = () => {
+  const [cart_, setCart_] = useRecoilState(CartState);
   const [products_, setProducts_] = useRecoilState(ProductsState);
   const [viewItem_, setViewItem_] = useRecoilState(ViewItemState);
   const [offer_, setOffer_] = useRecoilState(OfferState2);
   const [size_, setSize_] = useState(0);
+  const [unitPrompt_, setUnitPrompt_] = useState(false);
 
   const [price_, setPrice_] = useState(0);
+  const [units_, setUnits_] = useState(1);
 
   const [newDesc_, setNewDesc_] = useState("");
   const [bucket_, setBucket_] = useRecoilState(BucketState);
@@ -98,38 +101,106 @@ const ItemViewMobile_ = () => {
           className={`w-full min-h-2 absolute bottom-0 left-0 flex-col justify-center items-center transition-all px-4`}
         >
           <p className={`text-white text-[25px] font-black mb-1`}>
-            Charlie Simmons
+            {offer_ && offer_.title}
           </p>
           <p className={`text-white text-[18px] font-bold mb-1`}>
-            R<span className={``}>240</span> Per 2L Bucket
+            <span
+              className={`text-[10px] px-2 bg-red-600 animate-pulse hover:bg-red-600/60 transition-all duration-200 relative bottom-1 cursor-pointer rounded text-white`}
+              onClick={() => {
+                setUnitPrompt_(true);
+              }}
+            >
+              x{units_}
+            </span>{" "}
+            {bucket_} {units_ > 1 ? "Buckets" : "Bucket"} for{" "}
+            <span className={``}>
+              R
+              {offer_ && units_ * offer_.price[bucket_.replace("L", "").replace(".", "")]}
+            </span>
           </p>
           <p className={`text-white/70 text-[13px] font-normal mb-3`}>
-            Deserunt sint labore culpa ut ea ex consequat est sint voluptate
+            {/* Deserunt sint labore culpa ut ea ex consequat est sint voluptate
             irure excepteur Lorem. Minim aliquip in deserunt consectetur aliquip
             qui excepteur ut cillum amet. Proident deserunt sint et culpa
-            eiusmod sit do.
+            eiusmod sit do. */}
+            {offer_ && offer_.desc}
           </p>
           <div
             className={`font-black w-full scale-[.8] mx-auto h-[50px] mb-2 transition-all duration-75 hover:duration-500 flex flex-row justify-center items-center`}
             onClick={() => {
-              setViewItem_(false);
+              // setViewItem_(false);
             }}
           >
             {["2l", "5l", "6.5l", "10l", "20l"].map((obj_, index_) => {
-              return <div className={`h-[50px] w-[100px] bg-white/30 backdrop-blur-md rounded-[6px] mx-[4px] flex flex-col justify-center items-center text-white font-medium cursor-pointer`} key={index_}>
-                {obj_}
-              </div>;
+              return (
+                <div
+                  className={`h-[50px] w-[100px] bg-white/30 backdrop-blur-md rounded-[6px] mx-[4px] flex flex-col justify-center items-center font-medium cursor-pointer ${offer_ && price_ == offer_.price[obj_.replace("l", "").replace(".", "")] ? 'bg-white/70 text-black' : 'bg-white/30 text-white'}`}
+                  key={index_}
+                  onClick={() => {
+                    setPrice_(
+                      offer_.price[obj_.replace("l", "").replace(".", "")]
+                    );
+                    setBucket_(obj_.toUpperCase());
+                  }}
+                >
+                  {obj_}
+                </div>
+              );
             })}
           </div>
           <div
             className={`font-black text-white/80 w-[90%] mx-auto h-[50px] mb-4 border-[1px] bg-red-600/80 hover:bg-blue-200/80 backdrop-blur-md border-red-600/30 hover:border-white/50 transition-all duration-75 hover:duration-500 border-solid rounded-[3px] flex flex-row cursor-pointer justify-center items-center`}
             onClick={() => {
+              setProducts_([
+                {
+                  name: offer_.title,
+                  quantity: units_,
+                  size: bucket_,
+                  price:
+                  offer_.price[bucket_.replace("L", "").replace(".", "")],
+                  subtotal:
+                  units_ * offer_.price[bucket_.replace("L", "").replace(".", "")],
+                },
+                ...products_,
+              ]);
+    
+              setUnits_(1);
+    
               setViewItem_(false);
+              setCart_(true);
             }}
           >
             Add To Cart
           </div>
         </div>
+      </div>
+      <div
+        className={`flex flex-col justify-center items-center w-full min-h-screen absolute top-0 left-0 bg-white/50 backdrop-blur-md transition-all ${
+          unitPrompt_
+            ? "opacity-100 pointer-events-auto duration-75"
+            : "opacity-0 pointer-events-none duration-200"
+        }`}
+      >
+        <p
+          className={`w-full h-[40px] text-center text-[20px] text-black font-black`}
+        >
+          {/* Currently set to {units_} {units_ > 1 ? "Buckets" : "Bucket"} */}
+        </p>
+        <textarea
+          className={`w-full h-[40px] text-center text-[20px] text-black`}
+          placeholder={`How many uinits would you like?`}
+          onChange={(e) => {
+            setUnits_(parseFloat(e.target.value) || 0)
+          }}
+        />
+        <div
+            className={`font-black text-white/80 w-[90%] mx-auto h-[50px] absolute bottom-4 border-[1px] bg-red-600/80 hover:bg-blue-200/80 backdrop-blur-md border-red-600/30 hover:border-white/50 transition-all duration-75 hover:duration-500 border-solid rounded-[3px] flex flex-row cursor-pointer justify-center items-center`}
+            onClick={() => {
+              setUnitPrompt_(false);
+            }}
+          >
+            Apply
+          </div>
       </div>
     </div>
   );
