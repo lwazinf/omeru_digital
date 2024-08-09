@@ -1,4 +1,5 @@
 import { faFacebook, faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Logo_ = () => {
@@ -62,6 +63,7 @@ export const Logo_ = () => {
       <div
             className={`relative w-full h- flex flex-col px-[80px] duration-[1000ms] justify-items-center items-center transition-all`}
           >
+            <p className={`absolute flex md:hidden top-[-90px] text-[15px] animate-pulse pointer-events-none w-[150px] -rotate-90 opacity-60`}><span className={`mx-2 opacity-100`}><FontAwesomeIcon icon={faArrowLeft} /> </span>Social Media</p>
             {[
               { icon: faTwitter },
               { icon: faFacebook },
@@ -72,7 +74,7 @@ export const Logo_ = () => {
                 <FontAwesomeIcon
                   key={index}
                   icon={obj_.icon}
-                  className={`transition-all text-[20px] cursor-pointer my-1 hover:text-[#ec1d2a] hover:duration-[75ms] duration-[1000ms] text-black/80`}
+                  className={`transition-all text-[20px] cursor-pointer my-2 md:my-1 hover:text-[#ec1d2a] hover:duration-[75ms] duration-[1000ms] md:text-black/80`}
                   onClick={() => {
                     // go to twitter page
                   }}

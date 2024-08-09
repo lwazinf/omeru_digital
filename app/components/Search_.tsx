@@ -3,6 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CartState, SearchState, SideBarState, UserState } from "./atoms/atoms";
 import {
+  faArrowRight,
   faArrowRotateLeft,
   faBars,
   faBasketShopping,
@@ -23,7 +24,7 @@ const Search_ = () => {
   const [searchTemp_, setSearchTemp_] = useState("");
   return (
     <div
-      className={`md:w-[550px] w-[200px] h-[35px] border-solid border-[1px] border-black/25 rounded-[4px] flex-row justify-center items-center relative mb-4 hidden md:flex`}
+      className={`md:w-[550px] w-[200px] h-[35px] border-solid border-[1px] border-black/25 rounded-[4px] flex-row justify-center items-center relative md:mb-4 flex`}
     >
       <FontAwesomeIcon
         icon={faSearch}
@@ -31,15 +32,19 @@ const Search_ = () => {
         onClick={async () => {}}
       />
       <FontAwesomeIcon
-        icon={faArrowRotateLeft}
+        icon={!searchPhrase_ ? faArrowRight : faArrowRotateLeft}
         className={`mx-3 ml-2 text-[15px] text-black/60 cursor-pointer absolute right-0 ${
           searchPhrase_ == ""
-            ? "opacity-0 animate-none pointer-events-none"
-            : "opacity-100 animate-pulse pointer-events-auto"
+            ? "opacity-100"
+            : "opacity-100"
         } transition-all duration-200`}
         onClick={() => {
+          if(searchPhrase_ == ""){
+            setSearchPhrase_(searchTemp_);
+          }
+            else{
           setSearchPhrase_("");
-          setSearchTemp_("");
+          setSearchTemp_("");}
         }}
       />
       <input
@@ -57,8 +62,9 @@ const Search_ = () => {
           }
         }}
       />
+      
       <div
-        className={`relative min-w-[40px] min-h-[40px] left-[100px] flex flex-row justify-center items-center`}
+        className={`relative min-w-[40px] min-h-[40px] left-[100px] flex-row justify-center items-center md:flex hidden`}
       >
         <div
           className={`w-[40px] h-[40px] rounded-[50%] cursor-pointer flex flex-col justify-center items-center scale-[.9] hover:opacity-60 transition-all duration-200 ${

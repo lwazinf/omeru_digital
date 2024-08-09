@@ -160,7 +160,7 @@ const Model_ = () => {
           Proceed to payment
         </div>
       </div>
-      <div className={`flex flex-row items-center justify-center mb-8 mt-4`}>
+      <div className={`md:flex flex-row items-center justify-center mb-8 mt-4 hidden`}>
         {[
           { icon: faTwitter },
           { icon: faFacebook },

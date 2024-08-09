@@ -15,6 +15,8 @@ import {
   PillState,
   SideBarState,
 } from "../atoms/atoms";
+import { Logo_, Social2_, Social_ } from "../Logo_";
+import Search_ from "../Search_";
 
 interface MobileCard_Props {}
 
@@ -28,12 +30,66 @@ const MobileCard_ = () => {
   useEffect(() => {}, [sideBar_]);
   return (
     <div
-      className={`w-full h-full flex flex-col justify-end items-center bg-black/50 backdrop-blur-md fixed top-0 py-1 z-[6] ${lock_ ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+      className={`w-full h-full flex-col justify-center items-center bg-white/50 backdrop-blur-md fixed top-0 py-1 z-[6] flex md:hidden ${
+        lock_
+          ? "opacity-100 pointer-events-auto duration-75"
+          : "opacity-0 pointer-events-none duration-[400ms]"
+      }`}
     >
+      <div className={`md:w-[350px] w-full min-h-screen absolute top-0 left-0`}>
+        <img
+          //   src={`/assets/images/bg.png`}
+          className={`flex-col flex items-center justify-center w-full min-h-screen pointer-events-none`}
+          style={{
+            backgroundImage: `url(${"/assets/images/bg.png"})`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "80%",
+            opacity: "0.05",
+          }}
+        />
+      </div>
+      <div className={`scale-[2] relative bottom-10`}>
+        <Logo_ />
+      </div>
       <div
-        className={`min-h-2 p-2 w-full grid grid-cols-3 gap-2 justify-center items-center scale-[95%] py-2 transition-all duration-200 ${lock_ ? 'mb-0 opacity-100' : 'mb-20 opacity-0'} rounded-[12px] shadow-md bg-white/80 backdrop-blur-md md:hidden transition-all`}
+        className={`flex flex-col justify-center items-center w-[400px] bg-red-600 relative rounded-md md:left-10 bottom-[30px] h-[650px] shadow-xl overflow-hidden transition-all scale-[0.8] ${
+          lock_
+            ? "mb-1 opacity-100 duration-500"
+            : "mb-[80px] opacity-0 duration-[400ms]"
+        }`}
+        onClick={() => {}}
+      >
+        <img
+          className={`w-full h-full object-cover scale-[1] transition-all duration-[500ms] hover:duration-[200ms]`}
+          src={
+            "/assets/images/cabinet.jpg"
+            // featured_[feature_]
+          }
+        />
+      </div>
+      {/* <div
+        className={`w-[100px] min-h-2 flex flex-row justify-end items-end absolute left-8 scale-[1.2] opacity-70`}
+      >
+        <Social2_ />
+      </div> */}
+      <div
+        className={`relative bottom-[20px] ml-auto
+     min-w-2 min-h-2 flex p-1 mr-3 justify-center items-center transition-all ${
+        lock_
+          ? "mb-1 opacity-100 duration-500"
+          : "mb-[-80px] opacity-0 duration-[400ms]"
+      } rounded-[5px] shadow-md bg-white/80 backdrop-blur-md md:hidden transition-all`}
+      >
+        <Search_ />
+      </div>
+      <div
+        className={`min-h-2 p-2 w-full grid grid-cols-3 gap-2 justify-center items-center scale-[95%] py-2 transition-all absolute bottom-0 ${
+          lock_
+            ? "mb-1 opacity-100 duration-500"
+            : "mb-[-80px] opacity-0 duration-[400ms]"
+        } rounded-[12px] shadow-md bg-white/80 backdrop-blur-md md:hidden transition-all`}
         onClick={() => {
-          console.log(categories_)
+          console.log(categories_);
         }}
       >
         {categories_.slice(0, 4).map((obj_: any, index: any) => {
@@ -45,8 +101,8 @@ const MobileCard_ = () => {
               key={index}
               onClick={() => {
                 setPill_(!pill_);
-                setCollection_(obj_ == collection_ ? "" : obj_)
-                setLock_(false)
+                setCollection_(obj_ == collection_ ? "" : obj_);
+                setLock_(false);
               }}
             >
               <p className={`text-[12px] text-center min-w-[80px]`}>{obj_}</p>
@@ -54,14 +110,17 @@ const MobileCard_ = () => {
           );
         })}
         <div
-              className={`min-w-[80px] h-[20px] border-solid border-[1px] border-red-600 flex flex-row justify-center items-center rounded-[15px] mx-1 px-4 cursor-pointer text-white/80 bg-red-600 transition-all duration-500 hover:duration-200`}
-              onClick={() => {
-                setLock_(false)
-              }}
-            >
-              <FontAwesomeIcon icon={faAngleLeft} className={`text-[12px] font-medium mr-1`}/> 
-              <p className={`text-[12px] font-medium`}>back</p>
-            </div>
+          className={`min-w-[80px] h-[20px] border-solid border-[1px] border-red-600 flex flex-row justify-center items-center rounded-[15px] mx-1 px-4 cursor-pointer text-white/80 bg-red-600 transition-all duration-500 hover:duration-200`}
+          onClick={() => {
+            setLock_(false);
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faAngleLeft}
+            className={`text-[12px] font-medium mr-1`}
+          />
+          <p className={`text-[12px] font-medium`}>back</p>
+        </div>
       </div>
     </div>
   );
