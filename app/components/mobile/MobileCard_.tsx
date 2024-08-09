@@ -73,8 +73,8 @@ const MobileCard_ = () => {
         <Social2_ />
       </div> */}
       <div
-        className={`relative bottom-[20px] ml-auto
-     min-w-2 min-h-2 flex p-1 mr-3 justify-center items-center transition-all ${
+        className={`relative bottom-[20px]
+     min-w-2 min-h-2 flex p-1 flex-col justify-center items-center transition-all ${
         lock_
           ? "mb-1 opacity-100 duration-500"
           : "mb-[-80px] opacity-0 duration-[400ms]"
@@ -83,11 +83,11 @@ const MobileCard_ = () => {
         <Search_ />
       </div>
       <div
-        className={`min-h-2 p-2 w-full grid grid-cols-3 gap-2 justify-center items-center scale-[95%] py-2 transition-all absolute bottom-0 ${
+        className={`min-h-2 p-2 w-[350px] grid grid-cols-3 gap-2 justify-center items-center scale-[95%] py-2 transition-all absolute bottom-0 ${
           lock_
             ? "mb-1 opacity-100 duration-500"
             : "mb-[-80px] opacity-0 duration-[400ms]"
-        } rounded-[12px] shadow-md bg-white/80 backdrop-blur-md md:hidden transition-all`}
+        } rounded-[4px] shadow-md bg-white/80 backdrop-blur-md md:hidden transition-all`}
         onClick={() => {
           console.log(categories_);
         }}

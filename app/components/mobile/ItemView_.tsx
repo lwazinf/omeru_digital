@@ -69,11 +69,11 @@ const ItemViewMobile_ = () => {
         <div
           className={`w-[140px] min-h-2 flex flex-row justify-center items-center`}
         >
-          <div className={`w-[35px] h-[35px] bg-white rounded-[50%]`}></div>
+          <div className={`w-[25px] h-[25px] bg-white rounded-[50%] mr-1 mt-2`}></div>
           <div
-            className={`w-[100px] h-[35px] bg-black/70 backdrop-blur-md rounded-[20px] mx-1 flex flex-col justify-center items-center text-[13px] font-medium text-white/70 border-white/70 border-[1px] border-solid`}
+            className={`min-w-2 min-h-2 px-2 py-1 bg-white/10 mt-2 backdrop-blur-md rounded-[6px] mx-1 flex flex-col justify-center items-center text-[11px] font-bold text-white/70`}
           >
-            {offer_ && offer_.title}
+            Lwazi Ndlovu
           </div>
         </div>
         <div
@@ -85,12 +85,16 @@ const ItemViewMobile_ = () => {
               setViewItem_(false);
             }}
           >
+            <div
+            className={`min-w-2 min-h-2 px-2 py-1 bg-white/10 mt-2 backdrop-blur-md rounded-[6px] mx-1 flex flex-row justify-center items-center text-[11px] font-medium text-white/70`}
+          >
             <FontAwesomeIcon icon={faAngleLeft} className={``} />
             <p
-              className={`text-white text-[13px] ml-2 mt-[2.5px] font-medium mb-1`}
+              className={`text-white text-[11px] ml-2 mt-[2.5px] font-medium mb-1`}
             >
               Back
             </p>
+            </div>
           </div>
         </div>
       </div>

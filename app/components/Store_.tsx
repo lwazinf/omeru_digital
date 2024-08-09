@@ -14,16 +14,19 @@ import Search_ from "./Search_";
 import Pills_ from "./Pills_";
 import Footer_ from "./Footer_";
 import InitProduct_ from "./InitProduct_";
-import { Social2_ } from "./Logo_";
+import { Logo_, Social2_ } from "./Logo_";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faSearch,
+  faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons";
+import MobileMenu_ from "./mobile/MobileMenu_";
 
 const Store_ = () => {
   const [viewItem_, setViewItem_] = useRecoilState(ViewItemState);
   return (
-    <div
-      className={`flex min-h-screen flex-col items-center justify-start md:pt-4 pt-[80px] mb-[100px]`}
-    >
+    <div className={`flex min-h-screen flex-col items-center justify-star`}>
       <div
         className={`md:w-full w-full min-h-screen fixed top-0 right-0 overflow-hidden`}
       >
@@ -56,9 +59,23 @@ const Store_ = () => {
       <Pills_ />
       <Offers_ />
       <div
-        className={`w-[100px] min-h-2 flex flex-col justify-start items-end fixed right-[-45px] bottom-[200px] z-[9] md:hidden ${viewItem_ ? 'opacity-0' : 'opacity-70'}`}
+        className={`w-[60px] overflow-hidden min-h-screen flex pointer-events-none -rotate-900 flex-col justify-center items-center fixed right-0 z-[9] md:hidden `}
       >
-        <Social2_ />
+        <div
+          className={`flex flex-col justify-evenly items-center pb-8 ${
+            viewItem_ ? "opacity-0" : "opacity-80"
+          }`}
+        >
+          <div className={`min-w-[150px] absolute top-[15px]`}>
+            <MobileMenu_ />
+            </div>
+          <div className={`w-[150px] -rotate-90 mr-8`}>
+            <Logo_ />
+          </div>
+          <div className={`min-w-[150px] absolute bottom-[10px]`}>
+            <Social2_ />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -73,7 +90,7 @@ const Offers_ = () => {
   const [admin_, setAdmin_] = useRecoilState(AdminState);
   return (
     <div
-      className={`grid sm_2:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:mb-8`}
+      className={`grid sm_2:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:mb-8 md:my-0 my-[40px]`}
     >
       {admin_ &&
         [1].map((obj_, index) => {

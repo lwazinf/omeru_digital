@@ -38,7 +38,7 @@ export default function RootLayout({
           <Model_ />
           <SideBarTrigger_ />
           <SideBar_ />
-          <MobileMenu_ />
+          
           <MobileCard_ />
         </RecoilRoot>
       </body>
