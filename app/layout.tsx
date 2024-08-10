@@ -35,7 +35,9 @@ export default function RootLayout({
           <ItemViewMobile_ />
           <PaymentNotif_ />
           <CartTrigger_ />
+          <div className={`md:flex hidden`}>
           <Model_ />
+          </div>
           <SideBarTrigger_ />
           <SideBar_ />
           

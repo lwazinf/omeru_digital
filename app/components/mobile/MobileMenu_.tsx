@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import {
   CartState,
   MobileTrayState,
+  SearchState,
   SideBarState,
   ViewItemState,
 } from "../atoms/atoms";
@@ -20,6 +21,7 @@ const MobileMenu_ = () => {
   const [sideBar_, setSideBar_] = useRecoilState(SideBarState);
   const [lock_, setLock_] = useRecoilState(MobileTrayState);
   const [viewItem_, setViewItem_] = useRecoilState(ViewItemState);
+  const [searchPhrase_, setSearchPhrase_] = useRecoilState(SearchState);
   const [cart_, setCart_] = useRecoilState(CartState);
   useEffect(() => {}, [sideBar_]);
   return (
@@ -43,6 +45,7 @@ const MobileMenu_ = () => {
           func: () => {
             setCart_(false);
             setLock_(!lock_);
+            setSearchPhrase_('');
           },
         },
         { icon: faBars, func: () => {} },

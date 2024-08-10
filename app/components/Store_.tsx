@@ -1,5 +1,6 @@
 "use client";
 
+import { Link as ScrollLink, Element } from 'react-scroll';
 import { useRecoilState } from "recoil";
 import {
   SearchState,
@@ -8,6 +9,8 @@ import {
   UserState,
   AdminState,
   ViewItemState,
+  MobileTrayState,
+  CartState,
 } from "./atoms/atoms";
 import { Cake_, Product_ } from "./Product_";
 import Search_ from "./Search_";
@@ -24,6 +27,10 @@ import {
 import MobileMenu_ from "./mobile/MobileMenu_";
 
 const Store_ = () => {
+  const [collection_, setCollection_] = useRecoilState(CollectionState);
+  const [cart_, setCart_] = useRecoilState(CartState);
+  const [searchPhrase_, setSearchPhrase_] = useRecoilState(SearchState);
+  const [lock_, setLock_] = useRecoilState(MobileTrayState);
   const [viewItem_, setViewItem_] = useRecoilState(ViewItemState);
   return (
     <div className={`flex min-h-screen flex-col items-center justify-star`}>
@@ -59,7 +66,7 @@ const Store_ = () => {
       <Pills_ />
       <Offers_ />
       <div
-        className={`w-[60px] overflow-hidden min-h-screen flex pointer-events-none -rotate-900 flex-col justify-center items-center fixed right-0 z-[9] md:hidden `}
+        className={`w-[60px] overflow-hidden min-h-screen flex  -rotate-900 flex-col justify-center items-center fixed right-0 z-[9] md:hidden `}
       >
         <div
           className={`flex flex-col justify-evenly items-center pb-8 ${
@@ -71,6 +78,16 @@ const Store_ = () => {
             </div>
           <div className={`w-[150px] -rotate-90 mr-8`}>
             <Logo_ />
+            <ScrollLink to="section1" smooth={true} duration={500}>
+            <div className={`absolute w-[150px] h-full ml-2 top-0`}
+            onClick={() => {
+              setSearchPhrase_('')
+              setCollection_("");
+              setLock_(false)
+              setCart_(false)
+            }}
+            />
+            </ScrollLink>
           </div>
           <div className={`min-w-[150px] absolute bottom-[10px]`}>
             <Social2_ />
@@ -92,6 +109,7 @@ const Offers_ = () => {
     <div
       className={`grid sm_2:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:mb-8 md:my-0 my-[40px]`}
     >
+      <Element name="section1" className={`sm_2:hidden flex`}/>
       {admin_ &&
         [1].map((obj_, index) => {
           return <InitProduct_ key={index} />;

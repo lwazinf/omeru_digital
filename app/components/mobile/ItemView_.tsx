@@ -105,7 +105,7 @@ const ItemViewMobile_ = () => {
           className={`w-full min-h-2 absolute bottom-0 left-0 flex-col justify-center items-center transition-all px-4`}
         >
           
-          <div className={`text-white text-[25px] font-black mb-1 max-w-[180px] text-center px-2 py-1 bg-red-200/15 backdrop-blur-lg rounded-[6px]`}>
+          <div className={`text-white text-[22px] font-black mb-1 max-w-[180px] text-center px-2 py-1 bg-red-200/15 backdrop-blur-lg rounded-[6px]`}>
             {offer_ && offer_.title}
           </div>
           <p className={`text-white text-[18px] font-bold mb-1`}>
@@ -117,10 +117,11 @@ const ItemViewMobile_ = () => {
             >
               x{units_}
             </span>{" "}
-            {bucket_} {units_ > 1 ? "Buckets" : "Bucket"} for{" "}
+            {offer_ && offer_.type == 'Bulk' && bucket_} {offer_ && offer_.type == 'Single' ? units_ > 1 ? "Units" : "Unit" : offer_ && offer_.type == 'Bulk' && units_ > 1 ? "Buckets" : "Bucket"} for{" "}
             <span className={``}>
               R
-              {offer_ && units_ * offer_.price[bucket_.replace("L", "").replace(".", "")]}
+              {offer_ && offer_.type == 'Bulk' && units_ * offer_.price[bucket_.replace("L", "").replace(".", "")]}
+              {offer_ && offer_.type == 'Single' && units_ * offer_.price}
             </span>
           </p>
           <p className={`text-white/70 text-[13px] font-normal mb-3`}>
@@ -131,7 +132,7 @@ const ItemViewMobile_ = () => {
             {offer_ && offer_.desc}
           </p>
           <div
-            className={`font-black w-full scale-[.8] mx-auto h-[50px] mb-2 transition-all duration-75 hover:duration-500 flex flex-row justify-center items-center`}
+            className={`font-black w-full scale-[.8] mx-auto h-[50px] mb-2 transition-all duration-75 hover:duration-500 flex flex-row justify-center items-center ${offer_ && offer_.type == 'Single' ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}
             onClick={() => {
               // setViewItem_(false);
             }}
@@ -156,20 +157,36 @@ const ItemViewMobile_ = () => {
             })}
           </div>
           <div
-            className={`w-[376px] h-[50px] mx-auto sm_2:m-0 mb-4 border-[1px] bg-red-600/80 backdrop-blur-md transition-all duration-75 hover:duration-500 cursor-pointer min-w-2 min-h-2 px-2 py-1 hover:bg-white/10 rounded-[6px] flex flex-col justify-center items-center text-[11px] font-bold text-white/70`}
+            className={`w-[376px] h-[50px] mx-auto sm_2:m-0 mb-4 border-[1px] bg-red-600/80 backdrop-blur-md transition-all duration-75 hover:duration-500 cursor-pointer min-w-2 min-h-2 px-2 py-1 hover:bg-white/10 rounded-[6px] flex flex-col justify-center items-center text-[14px] font-bold text-white/70`}
             onClick={() => {
-              setProducts_([
-                {
-                  name: offer_.title,
-                  quantity: units_,
-                  size: bucket_,
-                  price:
-                  offer_.price[bucket_.replace("L", "").replace(".", "")],
-                  subtotal:
-                  units_ * offer_.price[bucket_.replace("L", "").replace(".", "")],
-                },
-                ...products_,
-              ]);
+              if(offer_.type == 'Bulk'){
+                setProducts_([
+                  {
+                    name: offer_.title,
+                    quantity: units_,
+                    size: bucket_,
+                    price:
+                    offer_.price[bucket_.replace("L", "").replace(".", "")],
+                    subtotal:
+                    units_ * offer_.price[bucket_.replace("L", "").replace(".", "")],
+                  },
+                  ...products_,
+                ]);
+              }else if(offer_.type == 'Cake'){
+
+              }else{
+                setProducts_([
+                  {
+                    name: offer_.title,
+                    quantity: units_,
+                    price:
+                    offer_.price,
+                    subtotal:
+                    units_ * offer_.price,
+                  },
+                  ...products_,
+                ]);
+              }
     
               setUnits_(1);
     

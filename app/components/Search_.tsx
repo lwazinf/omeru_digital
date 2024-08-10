@@ -1,7 +1,13 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CartState, SearchState, SideBarState, UserState } from "./atoms/atoms";
+import {
+  CartState,
+  MobileTrayState,
+  SearchState,
+  SideBarState,
+  UserState,
+} from "./atoms/atoms";
 import {
   faArrowRight,
   faArrowRotateLeft,
@@ -12,7 +18,7 @@ import {
   faSignOut,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { signIn_, signOut_ } from "./utils/utils";
 
@@ -22,9 +28,16 @@ const Search_ = () => {
   const [cart_, setCart_] = useRecoilState(CartState);
   const [sideBar_, setSideBar_] = useRecoilState(SideBarState);
   const [searchTemp_, setSearchTemp_] = useState("");
+  const [lock_, setLock_] = useRecoilState(MobileTrayState);
+
+  useEffect(() => {
+    if (searchPhrase_ == "") {
+      setSearchTemp_("");
+    }
+  }, [searchPhrase_]);
   return (
     <div
-      className={`md:w-[550px] w-[200px] h-[35px] border-solid border-[1px] border-black/25 rounded-[4px] flex-row justify-center items-center relative md:mb-4 flex`}
+      className={`md:w-[550px] w-[310px] h-[35px] border-solid border-[1px] border-red-600/50 md:rounded-[4px] rounded-[8px] flex-row justify-center items-center relative md:mb-4 flex bg-white/70`}
     >
       <FontAwesomeIcon
         icon={faSearch}
@@ -33,18 +46,19 @@ const Search_ = () => {
       />
       <FontAwesomeIcon
         icon={!searchPhrase_ ? faArrowRight : faArrowRotateLeft}
-        className={`mx-3 ml-2 text-[15px] text-black/60 cursor-pointer absolute right-0 ${
-          searchPhrase_ == ""
-            ? "opacity-100"
-            : "opacity-100"
+        className={`mx-3 ml-2 text-[15px] ${
+          !searchPhrase_ ? "text-black/60" : "text-red-600/60"
+        } cursor-pointer absolute right-0 ${
+          searchPhrase_ == "" ? "opacity-100" : "opacity-100"
         } transition-all duration-200`}
         onClick={() => {
-          if(searchPhrase_ == ""){
+          if (searchPhrase_ == "") {
             setSearchPhrase_(searchTemp_);
+            setLock_(false);
+          } else {
+            setSearchPhrase_("");
+            setSearchTemp_("");
           }
-            else{
-          setSearchPhrase_("");
-          setSearchTemp_("");}
         }}
       />
       <input
@@ -59,10 +73,11 @@ const Search_ = () => {
           if (e.key === "Enter") {
             // Log "Hi" to the console
             setSearchPhrase_(searchTemp_);
+            setLock_(false);
           }
         }}
       />
-      
+
       <div
         className={`relative min-w-[40px] min-h-[40px] left-[100px] flex-row justify-center items-center md:flex hidden`}
       >
