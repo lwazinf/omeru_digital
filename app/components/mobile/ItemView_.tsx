@@ -86,7 +86,7 @@ const ItemViewMobile_ = () => {
             }}
           >
             <div
-            className={`min-w-2 min-h-2 px-2 py-1 bg-white/10 mt-2 backdrop-blur-md rounded-[6px] mx-1 flex flex-row justify-center items-center text-[11px] font-medium text-white/70`}
+            className={`min-w-2 min-h-2 px-2 py-0 bg-white/10 mt-2 backdrop-blur-md rounded-[6px] mx-1 flex flex-row justify-center items-center text-[11px] font-medium text-white/70`}
           >
             <FontAwesomeIcon icon={faAngleLeft} className={``} />
             <p
@@ -104,9 +104,10 @@ const ItemViewMobile_ = () => {
         <div
           className={`w-full min-h-2 absolute bottom-0 left-0 flex-col justify-center items-center transition-all px-4`}
         >
-          <p className={`text-white text-[25px] font-black mb-1`}>
+          
+          <div className={`text-white text-[25px] font-black mb-1 max-w-[180px] text-center px-2 py-1 bg-red-200/15 backdrop-blur-lg rounded-[6px]`}>
             {offer_ && offer_.title}
-          </p>
+          </div>
           <p className={`text-white text-[18px] font-bold mb-1`}>
             <span
               className={`text-[10px] px-2 bg-red-600 animate-pulse hover:bg-red-600/60 transition-all duration-200 relative bottom-1 cursor-pointer rounded text-white`}
@@ -138,7 +139,9 @@ const ItemViewMobile_ = () => {
             {["2l", "5l", "6.5l", "10l", "20l"].map((obj_, index_) => {
               return (
                 <div
-                  className={`h-[50px] w-[100px] bg-white/30 backdrop-blur-md rounded-[6px] mx-[4px] flex flex-col justify-center items-center font-medium cursor-pointer ${offer_ && price_ == offer_.price[obj_.replace("l", "").replace(".", "")] ? 'bg-white/70 text-black' : 'bg-white/30 text-white'}`}
+                  className={`min-h-2 w-[100px] py-1 backdrop-blur-md rounded-[6px] mx-[4px] flex flex-col justify-center items-center font-medium cursor-pointer ${offer_ && price_ == offer_.price[obj_.replace("l", "").replace(".", "")] ? 'bg-red-600/80 text-black animate-pulse' : 'bg-white/30 text-white'}
+                    
+                     transition-all duration-75 hover:duration-500 hover:bg-white/10 text-white/70`}
                   key={index_}
                   onClick={() => {
                     setPrice_(
@@ -153,7 +156,7 @@ const ItemViewMobile_ = () => {
             })}
           </div>
           <div
-            className={`font-black text-white/80 w-[90%] mx-auto h-[50px] mb-4 border-[1px] bg-red-600/80 hover:bg-blue-200/80 backdrop-blur-md border-red-600/30 hover:border-white/50 transition-all duration-75 hover:duration-500 border-solid rounded-[3px] flex flex-row cursor-pointer justify-center items-center`}
+            className={`w-[376px] h-[50px] mx-auto sm_2:m-0 mb-4 border-[1px] bg-red-600/80 backdrop-blur-md transition-all duration-75 hover:duration-500 cursor-pointer min-w-2 min-h-2 px-2 py-1 hover:bg-white/10 rounded-[6px] flex flex-col justify-center items-center text-[11px] font-bold text-white/70`}
             onClick={() => {
               setProducts_([
                 {

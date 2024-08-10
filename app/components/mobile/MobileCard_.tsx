@@ -48,14 +48,18 @@ const MobileCard_ = () => {
           }}
         />
       </div>
-      <div className={`scale-[2] relative bottom-10`}>
+      <div className={`scale-[2] relative bottom-10 ${
+          lock_
+            ? "mr-1 opacity-100 duration-500"
+            : "mr-[-80px] opacity-0 duration-[400ms]"
+        }`}>
         <Logo_ />
       </div>
       <div
-        className={`flex flex-col justify-center items-center w-[400px] bg-red-600 relative rounded-md md:left-10 bottom-[30px] h-[650px] shadow-xl overflow-hidden transition-all scale-[0.8] ${
+        className={`flex flex-col justify-center items-center w-[400px] relative rounded-md md:left-10 bottom-[30px] h-[650px] shadow-xl overflow-hidden transition-all scale-[0.8] ${
           lock_
-            ? "mb-1 opacity-100 duration-500"
-            : "mb-[80px] opacity-0 duration-[400ms]"
+            ? "mr-1 opacity-100 duration-500"
+            : "mr-[-80px] opacity-0 duration-[400ms]"
         }`}
         onClick={() => {}}
       >
@@ -72,27 +76,18 @@ const MobileCard_ = () => {
       >
         <Social2_ />
       </div> */}
+      <div className={`flex flex-col justify-center items-center absolute bottom-0`}>
       <div
-        className={`relative bottom-[20px]
-     min-w-2 min-h-2 flex p-1 flex-col justify-center items-center transition-all ${
-        lock_
-          ? "mb-1 opacity-100 duration-500"
-          : "mb-[-80px] opacity-0 duration-[400ms]"
-      } rounded-[5px] shadow-md bg-white/80 backdrop-blur-md md:hidden transition-all`}
-      >
-        <Search_ />
-      </div>
-      <div
-        className={`min-h-2 p-2 w-[350px] grid grid-cols-3 gap-2 justify-center items-center scale-[95%] py-2 transition-all absolute bottom-0 ${
+        className={`min-h-2 p-2 w-[350px] grid grid-cols-3 gap-2 justify-center items-center scale-[95%] py-2 transition-all ${
           lock_
-            ? "mb-1 opacity-100 duration-500"
-            : "mb-[-80px] opacity-0 duration-[400ms]"
+            ? "mr-1 opacity-100 duration-500"
+            : "mr-[-80px] opacity-0 duration-[400ms]"
         } rounded-[4px] shadow-md bg-white/80 backdrop-blur-md md:hidden transition-all`}
         onClick={() => {
           console.log(categories_);
         }}
       >
-        {categories_.slice(0, 4).map((obj_: any, index: any) => {
+        {[...categories_].map((obj_: any, index: any) => {
           return (
             <div
               className={`min-w-[80px] h-[20px] border-solid border-[1px] border-black/50 hover:border-red-600 flex flex-row justify-center items-center rounded-[15px] mx-1 px-4 cursor-pointer text-black/65 hover:text-white/80 hover:bg-red-600 ${
@@ -122,6 +117,17 @@ const MobileCard_ = () => {
           <p className={`text-[12px] font-medium`}>back</p>
         </div>
       </div>
+      <div
+        className={`relative
+     min-w-2 min-h-2 flex p-1 flex-col justify-center items-center transition-all ${
+       lock_
+         ? "mr-1 opacity-100 duration-500"
+         : "mr-[-80px] opacity-0 duration-[400ms]"
+     } rounded-[5px] shadow-md bg-white/60 backdrop-blur-md md:hidden transition-all`}
+      >
+        <Search_ />
+      </div>
+    </div>
     </div>
   );
 };
